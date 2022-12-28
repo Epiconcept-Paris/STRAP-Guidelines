@@ -7,16 +7,16 @@ output:
     reference_docx: template/style.docx
     toc: yes
     toc_depth: '3'
-  pdf_document:
-    number_sections: yes
-    toc: yes
-    toc_depth: '3'
   html_document:
     css: template/style.css
     number_sections: yes
     toc: yes
     toc_depth: 3
     toc_float: yes
+  pdf_document:
+    number_sections: yes
+    toc: yes
+    toc_depth: '3'
 editor_options: 
   chunk_output_type: console
 ---
@@ -29,13 +29,11 @@ knitr::opts_chunk$set(echo = TRUE)
 library(dplyr)
 ```
 
-
-
 # Introduction
 
-The Epidemiology team aims to harmonise its coding style across projects.
+The Epidemiology team aims to harmonise its R coding style across projects.
 
-This document describes the style that we aim to apply. It is based on <https://style.tidyverse.org/index.html>, initially derived from Google's original R style <https://google.github.io/styleguide/Rguide.html>.
+This document describes the style that we aim to apply. It is based on <https://style.tidyverse.org/index.html>, initially derived from Google's original R style guide <https://google.github.io/styleguide/Rguide.html>.
 
 The most important thing about a style guide is that it provides consistency. Making code easier to read will also allow to focus on the content.
 
@@ -43,13 +41,11 @@ Some decisions described in this guide are driven by the wish to keep our R code
 
 If you have any suggestion to this guide, please feel free to share them to the team at [strap\@epiconcept.fr](mailto:strap@epiconcept.fr)
 
-
-
 # Syntax
 
 ## Assignment
 
-Proper assignment `<-` is preferred over the equal sign. Never use right assignment:
+Proper assignment `<-` is preferred over the equal sign `=`. Never use the right assignment `->`:
 
 ```{r}
 # Good
@@ -80,30 +76,31 @@ iris_sepal <-
 ### Variables
 
 Use `CamelCase` for variable names (similarly to ECDC data warehouse format).
-```{r, eval=FALSE}
+
+```{r}
 # Good
-DayOne
+DayOne <- 1
 
 # Bad
-first_day_of_the_month
-djm1
+first_day_of_the_month <- 1
+djm1 <- 1
 ```
-
 
 ### Globals
 
-Global variables and constants should be in `UPPERCASE` with `snake_case`:
-```{r, eval=FALSE}
-# Good
-COUNTRY_CODE
-VACCINE_BRAND
-```
+Global variables and constants should be in `UPPERCASE` and `snake_case`:
 
+```{r}
+# Good
+COUNTRY_CODE <- c("CZ", "ES", "FR", "IT", "NO")
+VACCINE_DELAY <- 14
+```
 
 ### Functions
 
-Use a special `camelCase` for function names (first letter in lower case). 
-Start your function name with a verb as discussed in the following section [Function name]. 
+Use a special `camelCase` for function names (first letter in lower case) and `lower case` for its arguments.
+
+Because your function should reflect an action, start your function name with a verb (see also the fllowing section [Function name]).
 
 ```{r}
 # Good
@@ -117,14 +114,11 @@ do_nothing <- function(x, y) {
 }
 ```
 
-
 ### Files
 
-All file names should be in lower case: datafile, scripts, log files, image files, other output files. 
-Some OS are not case sensitive and this could lead to unexpected issues. 
-The extension can mix case to respect R standards: `.R` extension for scripts, 
-`.RData` extension for data.
-If needed `use_snake` case to separate words
+All file names should be in lower case: datafile, scripts, log files, image files, other output files. Some OS are not case sensitive and this could lead to unexpected issues.
+
+The extension can mix case to respect R standards: `.R` extension for scripts, `.RData` extension for data. If needed `use_snake` case to separate words
 
 ```{r, eval=FALSE}
 # Good
@@ -136,8 +130,7 @@ doNothing.R
 
 ## Packages
 
-Explicitly qualify package name (i.e., namespaces) for all rarely used external functions. 
-Some different packages are using the same function names and this may lead to unexpected error messages.
+Explicitly qualify package name (i.e., namespaces) when calling a function. Several R packages use sometimes the same function names and this may lead to conflicts between functions/packages and to unexpected error messages.
 
 ```{r}
 # Good
@@ -151,24 +144,22 @@ IrisSepal <- iris %>%
   arrange(-Sepal.Length) 
 ```
 
-
 ## Pipe `%>%`
 
-Pipes can be used but with parsimony. Don’t use them for short assignments (one line)
+Pipes can be used but with parsimony. Don't use them for short assignments (one line).
 
 ```{r}
+# Good
+Species <- iris$Species
+
 # Bad
 Species <- iris %>%
   dplyr::pull(Species)
-
-# Good
-Species <- iris$Species
 ```
 
-Try to avoid to use them for highly repeated assignments.
-Store intermediate results if this can help to check your code or if you can give meaningful names (if result is a step in your analyse) 
+Try to avoid to use them for highly repeated assignments. Store intermediate results if this can help to check your code or if you can give meaningful names (if result is a step in your analyse).
 
-Don't use the in place pipe `%<>%`(it requires another package and is not widely used) 
+Don't use the "in place pipe" `%<>%` as it requires another package and is not widely used.
 
 ```{r}
 # Good
@@ -182,30 +173,24 @@ iris %<>%
   dplyr::arrange(-Sepal.Length)
 ```
 
-
-# Functions
+# Functions {#functions-1}
 
 ## Function name
 
-A function must reflect an action. Therefore, strive to use verbs for function names.
-
-Ideally, try to be consistent and use `camelCase` for function name, 
-and `lower case` for its arguments. 
-
+A function must reflect an action. Therefore, strive to use verbs for function names. Ideally, try to be consistent and use `camelCase` for function name, and `lower case` for its arguments (see also the section above [Functions](#functions-1)).
 
 ## Return
 
-Use explicit returns. Do not rely on R’s implicit return feature. 
-It is better to be clear about your intent to return() an object.
+Use explicit returns. Do not rely on R's implicit return feature. It is better to be clear about your intent to `return()` an object.
 
 ```{r}
 # Good
-addValues <- function(x, y) {
+add2Values <- function(x, y) {
   return(x + y)
 }
 
 # Bad
-addValues <- function(x, y) {
+add2Values <- function(x, y) {
   x + y
 }
 ```
@@ -213,23 +198,35 @@ addValues <- function(x, y) {
 ## Call
 
 Please always specify the name of the arguments when calling a function.
+
 ```{r}
+library(tidyr)
+who[1:6, 1:8]
 
+# Good
+who %>% tidyr::pivot_longer(
+  cols = new_sp_m014:newrel_f65,
+  names_to = "variable",
+  values_to = "value"
+)
+
+# Bad
+who %>% tidyr::pivot_longer(
+  new_sp_m014:newrel_f65,
+  "variable",
+  values_to = "value"
+)
 ```
-
 
 # Code documentation
 
-There are two types of comments. Those which help to structure the code (header, section break) and those which give information about your code.   
-
+There are two types of comments. Those which help to structure the code (header, section break) and those which give information about your code.
 
 ## Structure
 
-Add sections to your script to structure your scripts and make it easier to navigate from chunk to chunk (shortcut: `Ctrl + Shift + r` for PC   or   `Cmd + Shift + R` for Mac). 
-Use subheadings as much as necessary.
+Add sections to your script to structure your scripts and make it easier to navigate from chunk to chunk (shortcut: `Ctrl + Shift + r` for PC or `Cmd + Shift + R` for Mac). Use sub-headings as much as necessary.
 
-This also allows the use of the RStudio tree view for navigating your code (see tree button).
-
+This also allows the use of the RStudio tree view for navigating your code (see `Outline` button).
 
 ```{r}
 # 0 - Script information --------------------------------------------------
@@ -244,53 +241,148 @@ This also allows the use of the RStudio tree view for navigating your code (see 
 
 ```
 
-Use a standard header when you create a R script (see snippets `epihead`) .
+Use a standard header when you create a R script (see the section [R Studio snippets] for [epihead]) .
 
-It is useful to mark the end of a script because it’s help to know which script has run correctly.
+It is useful to mark the end of a script because it helps to know which script has run properly.
 
 ```{r}
 # END of main.R -----------------------------------------------------------
 ```
 
-
 ## Comments
 
-Add comments to your code! Uncommented code could be very difficult to maintain
-Insert simple comments (no section) before every chunk of code
+Add comments to your code! Uncommented code will be very difficult to maintain. Insert simple comments (no section) before every chunk of code.
+
 ```{r}
-# Renaming of the variable 
+# Renaming variable 
 ```
 
-They should mainly explain why you are doing something. Comments are there to help people who don’t know your project to understand your objectives.
-You don’t need to explain R syntax except for tricky constructions.
+They should mainly explain **why** you are doing something. Comments are there to help people who don't know your project to understand your objectives. You don't need to explain the R syntax except for tricky constructions.
+
 ```{r}
 # Bad
-# Renaming of the variable
+# Renaming variable
+```
 
+```{r}
 # Better
-# Renaming of the variable according to the data dictionary
-# stored in whatever_data_disctionnary.csv
+# Renaming variable according to the data dictionary
+# stored in 'whatever_data_disctionnary.csv'
+```
 
 
+Another example:
+```{r}
 # Bad
 # Checking data
+```
 
+```{r}
 # Better
 # Checking for incorrect date format in vaccination dates 
 # to build list of inconsistencies (sent to country)
 ```
 
+# R Studio snippets
 
-# Tests
+Snippets are shortcuts designed to insert code into your scripts.
 
-# NEWS
+Using snippets you will have harmonised pieces of code avoiding copy/paste from one project to another.
 
-# GitHub
+## How to install them?
+
+In RStudio, go to the tools menu, then "edit code snippets" options. It will open an editor containing a file with a list of all snippets already defined (probably the default from RStudio). Copy the code of the desired snippet such as [epihead] snippet, and paste it at the end of the snippets list.
+
+## How to add them in a script?
+
+Write the name of the snippet you want to include in the script (ex: epihead). Press `tab` after. The code saved in the corresponding snippets will appear in your script.
+
+## Caution
+
+The snippet keyword should be inserted at the beginning of the line, all the following snippet declaration should be indented with one space.
+
+If some "epi" snippets previously inserted already exists remove them before pasting the new one.
+
+If you get any red squares once you copy the next page's snippets, you can select the snippet code, then press `shift-tab` then `tab` to remove them.
+
+## List of snippets
+
+### epihead
+
+**Aim:** To insert a standard header (You can put it at the top of each script)
+
+Code to be inserted into snippets file:
+
+```{r}
+  # Project Name : 
+  # Script Name  :
+  # GitHub repo  : 
+  # Summary      : 
+  # Date created : 
+  # Author       : 
+  # Date reviewed:
+  # Reviewed by  :
+  
+  # Description --------------------------------------------------------------
+  # 
+  
+  
+  # Changes Log --------------------------------------------------------------
+  # 
+  
+  # START of SCRIPT  --------------------------------------------------------
+  
+
+  # END of SCRIPT  --------------------------------------------------------
+```
+
+### todo
+
+**Aim:** To insert a standardised todo marker.
+
+Code to be inserted into snippets file:
+
+```{r}
+  # -----------------------------------------------------------------------
+  # Todo : ${1:todo}   
+  # -----------------------------------------------------------------------
+```
+
+## Example of snippet use
+
+```{r}
+# Project Name : I-MOVE-COVID-19
+# Script Name  : restriction flowchart countries surveillance.do
+# Summary      : Flowcharts that show the original data received, and the restrictions to the final data
+# Date created: August 2020
+# Author       : Esther Kissling
+# Date reviewed:
+# Reviewed by  :
+
+# ---------------------------------------------------------------------------------------------
+# Description : 
+# This do-file displays the original data received by country and shows all the records dropped
+# due to restrictions until the final dataset.
+# While really this is an analysis do-file, it is used for data validation, so we keep it here
+# (for the moment).
+# The output automatically goes to the Excel spreadsheet "Restrictions flowchart surveillance.xlsx" - 
+#   in the folder Excel/data validation 
+# 
+
+
+# ---------------------------------------------------------------------------------------------
+# Log version : 
+
+```
+
+# Tests: TO BE DEVELOPPED
+
+# NEWS: TO BE DEVELOPPED
+
+# GitHub: TO BE DEVELOPPED
 
 # Conclusion
 
-But remember... this is just a guide, it is not there to cause us more problems than it solves !
-Guide is there to help as much as possible, it's not an absolute ! 
-If following those rules seems difficult, then we could  re-evaluate them. 
+But remember... this is just a guide, it is not there to cause us more problems than it solves ! Guide is there to help as much as possible, it's not an absolute ! If following those rules seems difficult, then we could re-evaluate them.
 
 Have fun !

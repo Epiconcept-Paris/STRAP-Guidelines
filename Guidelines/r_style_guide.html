@@ -1495,11 +1495,11 @@ border-radius: 0px;
 
 <div id="introduction" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
-<p>The Epidemiology team aims to harmonise its coding style across
+<p>The Epidemiology team aims to harmonise its R coding style across
 projects.</p>
 <p>This document describes the style that we aim to apply. It is based
 on <a href="https://style.tidyverse.org/index.html" class="uri">https://style.tidyverse.org/index.html</a>, initially
-derived from Google’s original R style <a href="https://google.github.io/styleguide/Rguide.html" class="uri">https://google.github.io/styleguide/Rguide.html</a>.</p>
+derived from Google’s original R style guide <a href="https://google.github.io/styleguide/Rguide.html" class="uri">https://google.github.io/styleguide/Rguide.html</a>.</p>
 <p>The most important thing about a style guide is that it provides
 consistency. Making code easier to read will also allow to focus on the
 content.</p>
@@ -1513,8 +1513,8 @@ them to the team at <a href="mailto:strap@epiconcept.fr">strap@epiconcept.fr</a>
 <h1><span class="header-section-number">2</span> Syntax</h1>
 <div id="assignment" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Assignment</h2>
-<p>Proper assignment <code>&lt;-</code> is preferred over the equal
-sign. Never use right assignment:</p>
+<p>Proper assignment <code>&lt;-</code> is preferred over the equal sign
+<code>=</code>. Never use the right assignment <code>-&gt;</code>:</p>
 <pre class="r"><code># Good
 results &lt;- mean(iris$Sepal.Length)
 
@@ -1540,25 +1540,26 @@ iris_sepal &lt;-
 <p>Use <code>CamelCase</code> for variable names (similarly to ECDC data
 warehouse format).</p>
 <pre class="r"><code># Good
-DayOne
+DayOne &lt;- 1
 
 # Bad
-first_day_of_the_month
-djm1</code></pre>
+first_day_of_the_month &lt;- 1
+djm1 &lt;- 1</code></pre>
 </div>
 <div id="globals" class="section level3" number="2.2.2">
 <h3><span class="header-section-number">2.2.2</span> Globals</h3>
 <p>Global variables and constants should be in <code>UPPERCASE</code>
-with <code>snake_case</code>:</p>
+and <code>snake_case</code>:</p>
 <pre class="r"><code># Good
-COUNTRY_CODE
-VACCINE_BRAND</code></pre>
+COUNTRY_CODE &lt;- c(&quot;CZ&quot;, &quot;ES&quot;, &quot;FR&quot;, &quot;IT&quot;, &quot;NO&quot;)
+VACCINE_DELAY &lt;- 14</code></pre>
 </div>
 <div id="functions" class="section level3" number="2.2.3">
 <h3><span class="header-section-number">2.2.3</span> Functions</h3>
 <p>Use a special <code>camelCase</code> for function names (first letter
-in lower case). Start your function name with a verb as discussed in the
-following section <a href="#function-name">Function name</a>.</p>
+in lower case) and <code>lower case</code> for its arguments.</p>
+<p>Because your function should reflect an action, start your function
+name with a verb (see also the fllowing section <a href="#function-name">Function name</a>).</p>
 <pre class="r"><code># Good
 doNothing &lt;- function(x, y) {
   return()
@@ -1573,10 +1574,10 @@ do_nothing &lt;- function(x, y) {
 <h3><span class="header-section-number">2.2.4</span> Files</h3>
 <p>All file names should be in lower case: datafile, scripts, log files,
 image files, other output files. Some OS are not case sensitive and this
-could lead to unexpected issues. The extension can mix case to respect R
-standards: <code>.R</code> extension for scripts, <code>.RData</code>
-extension for data. If needed <code>use_snake</code> case to separate
-words</p>
+could lead to unexpected issues.</p>
+<p>The extension can mix case to respect R standards: <code>.R</code>
+extension for scripts, <code>.RData</code> extension for data. If needed
+<code>use_snake</code> case to separate words</p>
 <pre class="r"><code># Good
 do_nothing.R
 
@@ -1586,9 +1587,10 @@ doNothing.R</code></pre>
 </div>
 <div id="packages" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Packages</h2>
-<p>Explicitly qualify package name (i.e., namespaces) for all rarely
-used external functions. Some different packages are using the same
-function names and this may lead to unexpected error messages.</p>
+<p>Explicitly qualify package name (i.e., namespaces) when calling a
+function. Several R packages use sometimes the same function names and
+this may lead to conflicts between functions/packages and to unexpected
+error messages.</p>
 <pre class="r"><code># Good
 IrisSepal &lt;- iris %&gt;%
   dplyr::select(Species, Sepal.Length, Sepal.Width) %&gt;% 
@@ -1603,18 +1605,18 @@ IrisSepal &lt;- iris %&gt;%
 <h2><span class="header-section-number">2.4</span> Pipe
 <code>%&gt;%</code></h2>
 <p>Pipes can be used but with parsimony. Don’t use them for short
-assignments (one line)</p>
-<pre class="r"><code># Bad
-Species &lt;- iris %&gt;%
-  dplyr::pull(Species)
+assignments (one line).</p>
+<pre class="r"><code># Good
+Species &lt;- iris$Species
 
-# Good
-Species &lt;- iris$Species</code></pre>
+# Bad
+Species &lt;- iris %&gt;%
+  dplyr::pull(Species)</code></pre>
 <p>Try to avoid to use them for highly repeated assignments. Store
 intermediate results if this can help to check your code or if you can
-give meaningful names (if result is a step in your analyse)</p>
-<p>Don’t use the in place pipe <code>%&lt;&gt;%</code>(it requires
-another package and is not widely used)</p>
+give meaningful names (if result is a step in your analyse).</p>
+<p>Don’t use the “in place pipe” <code>%&lt;&gt;%</code> as it requires
+another package and is not widely used.</p>
 <pre class="r"><code># Good
 iris &lt;- iris %&gt;%
   dplyr::select(Species, Sepal.Length, Sepal.Width) %&gt;% 
@@ -1631,21 +1633,22 @@ iris %&lt;&gt;%
 <div id="function-name" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Function name</h2>
 <p>A function must reflect an action. Therefore, strive to use verbs for
-function names.</p>
-<p>Ideally, try to be consistent and use <code>camelCase</code> for
-function name, and <code>lower case</code> for its arguments.</p>
+function names. Ideally, try to be consistent and use
+<code>camelCase</code> for function name, and <code>lower case</code>
+for its arguments (see also the section above <a href="#functions-1">Functions</a>).</p>
 </div>
 <div id="return" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Return</h2>
 <p>Use explicit returns. Do not rely on R’s implicit return feature. It
-is better to be clear about your intent to return() an object.</p>
+is better to be clear about your intent to <code>return()</code> an
+object.</p>
 <pre class="r"><code># Good
-addValues &lt;- function(x, y) {
+add2Values &lt;- function(x, y) {
   return(x + y)
 }
 
 # Bad
-addValues &lt;- function(x, y) {
+add2Values &lt;- function(x, y) {
   x + y
 }</code></pre>
 </div>
@@ -1653,6 +1656,57 @@ addValues &lt;- function(x, y) {
 <h2><span class="header-section-number">3.3</span> Call</h2>
 <p>Please always specify the name of the arguments when calling a
 function.</p>
+<pre class="r"><code>library(tidyr)
+who[1:6, 1:8]</code></pre>
+<pre><code>## # A tibble: 6 x 8
+##   country   iso2  iso3   year new_sp_m014 new_sp_m1524 new_sp_m2534 new_sp_m3544
+##   &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;int&gt;       &lt;int&gt;        &lt;int&gt;        &lt;int&gt;        &lt;int&gt;
+## 1 Afghanis~ AF    AFG    1980          NA           NA           NA           NA
+## 2 Afghanis~ AF    AFG    1981          NA           NA           NA           NA
+## 3 Afghanis~ AF    AFG    1982          NA           NA           NA           NA
+## 4 Afghanis~ AF    AFG    1983          NA           NA           NA           NA
+## 5 Afghanis~ AF    AFG    1984          NA           NA           NA           NA
+## 6 Afghanis~ AF    AFG    1985          NA           NA           NA           NA</code></pre>
+<pre class="r"><code># Good
+who %&gt;% tidyr::pivot_longer(
+  cols = new_sp_m014:newrel_f65,
+  names_to = &quot;variable&quot;,
+  values_to = &quot;value&quot;
+)</code></pre>
+<pre><code>## # A tibble: 405,440 x 6
+##    country     iso2  iso3   year variable     value
+##    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;chr&gt;        &lt;int&gt;
+##  1 Afghanistan AF    AFG    1980 new_sp_m014     NA
+##  2 Afghanistan AF    AFG    1980 new_sp_m1524    NA
+##  3 Afghanistan AF    AFG    1980 new_sp_m2534    NA
+##  4 Afghanistan AF    AFG    1980 new_sp_m3544    NA
+##  5 Afghanistan AF    AFG    1980 new_sp_m4554    NA
+##  6 Afghanistan AF    AFG    1980 new_sp_m5564    NA
+##  7 Afghanistan AF    AFG    1980 new_sp_m65      NA
+##  8 Afghanistan AF    AFG    1980 new_sp_f014     NA
+##  9 Afghanistan AF    AFG    1980 new_sp_f1524    NA
+## 10 Afghanistan AF    AFG    1980 new_sp_f2534    NA
+## # ... with 405,430 more rows</code></pre>
+<pre class="r"><code># Bad
+who %&gt;% tidyr::pivot_longer(
+  new_sp_m014:newrel_f65,
+  &quot;variable&quot;,
+  values_to = &quot;value&quot;
+)</code></pre>
+<pre><code>## # A tibble: 405,440 x 6
+##    country     iso2  iso3   year variable     value
+##    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;chr&gt;        &lt;int&gt;
+##  1 Afghanistan AF    AFG    1980 new_sp_m014     NA
+##  2 Afghanistan AF    AFG    1980 new_sp_m1524    NA
+##  3 Afghanistan AF    AFG    1980 new_sp_m2534    NA
+##  4 Afghanistan AF    AFG    1980 new_sp_m3544    NA
+##  5 Afghanistan AF    AFG    1980 new_sp_m4554    NA
+##  6 Afghanistan AF    AFG    1980 new_sp_m5564    NA
+##  7 Afghanistan AF    AFG    1980 new_sp_m65      NA
+##  8 Afghanistan AF    AFG    1980 new_sp_f014     NA
+##  9 Afghanistan AF    AFG    1980 new_sp_f1524    NA
+## 10 Afghanistan AF    AFG    1980 new_sp_f2534    NA
+## # ... with 405,430 more rows</code></pre>
 </div>
 </div>
 <div id="code-documentation" class="section level1" number="4">
@@ -1665,9 +1719,9 @@ code.</p>
 <p>Add sections to your script to structure your scripts and make it
 easier to navigate from chunk to chunk (shortcut:
 <code>Ctrl + Shift + r</code> for PC or <code>Cmd + Shift + R</code> for
-Mac). Use subheadings as much as necessary.</p>
+Mac). Use sub-headings as much as necessary.</p>
 <p>This also allows the use of the RStudio tree view for navigating your
-code (see tree button).</p>
+code (see <code>Outline</code> button).</p>
 <pre class="r"><code># 0 - Script information --------------------------------------------------
 
 # 1 - R packages ----------------------------------------------------------
@@ -1677,49 +1731,143 @@ code (see tree button).</p>
 ## 2.1 - Case-based -------------------------------------------------------
 
 ## 2.2 - Aggregated -------------------------------------------------------</code></pre>
-<p>Use a standard header when you create a R script (see snippets
-<code>epihead</code>) .</p>
-<p>It is useful to mark the end of a script because it’s help to know
-which script has run correctly.</p>
+<p>Use a standard header when you create a R script (see the section <a href="#r-studio-snippets">R Studio snippets</a> for <a href="#epihead">epihead</a>) .</p>
+<p>It is useful to mark the end of a script because it helps to know
+which script has run properly.</p>
 <pre class="r"><code># END of main.R -----------------------------------------------------------</code></pre>
 </div>
 <div id="comments" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Comments</h2>
-<p>Add comments to your code! Uncommented code could be very difficult
-to maintain Insert simple comments (no section) before every chunk of
-code</p>
-<pre class="r"><code># Renaming of the variable </code></pre>
-<p>They should mainly explain why you are doing something. Comments are
-there to help people who don’t know your project to understand your
-objectives. You don’t need to explain R syntax except for tricky
-constructions.</p>
+<p>Add comments to your code! Uncommented code will be very difficult to
+maintain. Insert simple comments (no section) before every chunk of
+code.</p>
+<pre class="r"><code># Renaming variable </code></pre>
+<p>They should mainly explain <strong>why</strong> you are doing
+something. Comments are there to help people who don’t know your project
+to understand your objectives. You don’t need to explain the R syntax
+except for tricky constructions.</p>
 <pre class="r"><code># Bad
-# Renaming of the variable
-
-# Better
-# Renaming of the variable according to the data dictionary
-# stored in whatever_data_disctionnary.csv
-
-
-# Bad
-# Checking data
-
-# Better
+# Renaming variable</code></pre>
+<pre class="r"><code># Better
+# Renaming variable according to the data dictionary
+# stored in &#39;whatever_data_disctionnary.csv&#39;</code></pre>
+<p>Another example:</p>
+<pre class="r"><code># Bad
+# Checking data</code></pre>
+<pre class="r"><code># Better
 # Checking for incorrect date format in vaccination dates 
 # to build list of inconsistencies (sent to country)</code></pre>
 </div>
 </div>
-<div id="tests" class="section level1" number="5">
-<h1><span class="header-section-number">5</span> Tests</h1>
+<div id="r-studio-snippets" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> R Studio snippets</h1>
+<p>Snippets are shortcuts designed to insert code into your scripts.</p>
+<p>Using snippets you will have harmonised pieces of code avoiding
+copy/paste from one project to another.</p>
+<div id="how-to-install-them" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> How to install
+them?</h2>
+<p>In RStudio, go to the tools menu, then “edit code snippets” options.
+It will open an editor containing a file with a list of all snippets
+already defined (probably the default from RStudio). Copy the code of
+the desired snippet such as <a href="#epihead">epihead</a> snippet, and
+paste it at the end of the snippets list.</p>
 </div>
-<div id="news" class="section level1" number="6">
-<h1><span class="header-section-number">6</span> NEWS</h1>
+<div id="how-to-add-them-in-a-script" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> How to add them in a
+script?</h2>
+<p>Write the name of the snippet you want to include in the script (ex:
+epihead). Press <code>tab</code> after. The code saved in the
+corresponding snippets will appear in your script.</p>
 </div>
-<div id="github" class="section level1" number="7">
-<h1><span class="header-section-number">7</span> GitHub</h1>
+<div id="caution" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Caution</h2>
+<p>The snippet keyword should be inserted at the beginning of the line,
+all the following snippet declaration should be indented with one
+space.</p>
+<p>If some “epi” snippets previously inserted already exists remove them
+before pasting the new one.</p>
+<p>If you get any red squares once you copy the next page’s snippets,
+you can select the snippet code, then press <code>shift-tab</code> then
+<code>tab</code> to remove them.</p>
 </div>
-<div id="conclusion" class="section level1" number="8">
-<h1><span class="header-section-number">8</span> Conclusion</h1>
+<div id="list-of-snippets" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> List of snippets</h2>
+<div id="epihead" class="section level3" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> epihead</h3>
+<p><strong>Aim:</strong> To insert a standard header (You can put it at
+the top of each script)</p>
+<p>Code to be inserted into snippets file:</p>
+<pre class="r"><code>  # Project Name : 
+  # Script Name  :
+  # GitHub repo  : 
+  # Summary      : 
+  # Date created : 
+  # Author       : 
+  # Date reviewed:
+  # Reviewed by  :
+  
+  # Description --------------------------------------------------------------
+  # 
+  
+  
+  # Changes Log --------------------------------------------------------------
+  # 
+  
+  # START of SCRIPT  --------------------------------------------------------
+  
+
+  # END of SCRIPT  --------------------------------------------------------</code></pre>
+</div>
+<div id="todo" class="section level3" number="5.4.2">
+<h3><span class="header-section-number">5.4.2</span> todo</h3>
+<p><strong>Aim:</strong> To insert a standardised todo marker.</p>
+<p>Code to be inserted into snippets file:</p>
+<pre class="r"><code>  # -----------------------------------------------------------------------
+  # Todo : ${1:todo}   
+  # -----------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="example-of-snippet-use" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> Example of snippet
+use</h2>
+<pre class="r"><code># Project Name : I-MOVE-COVID-19
+# Script Name  : restriction flowchart countries surveillance.do
+# Summary      : Flowcharts that show the original data received, and the restrictions to the final data
+# Date created: August 2020
+# Author       : Esther Kissling
+# Date reviewed:
+# Reviewed by  :
+
+# ---------------------------------------------------------------------------------------------
+# Description : 
+# This do-file displays the original data received by country and shows all the records dropped
+# due to restrictions until the final dataset.
+# While really this is an analysis do-file, it is used for data validation, so we keep it here
+# (for the moment).
+# The output automatically goes to the Excel spreadsheet &quot;Restrictions flowchart surveillance.xlsx&quot; - 
+#   in the folder Excel/data validation 
+# 
+
+
+# ---------------------------------------------------------------------------------------------
+# Log version : </code></pre>
+</div>
+</div>
+<div id="tests-to-be-developped" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Tests: TO BE
+DEVELOPPED</h1>
+</div>
+<div id="news-to-be-developped" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> NEWS: TO BE
+DEVELOPPED</h1>
+</div>
+<div id="github-to-be-developped" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> GitHub: TO BE
+DEVELOPPED</h1>
+</div>
+<div id="conclusion" class="section level1" number="9">
+<h1><span class="header-section-number">9</span> Conclusion</h1>
 <p>But remember… this is just a guide, it is not there to cause us more
 problems than it solves ! Guide is there to help as much as possible,
 it’s not an absolute ! If following those rules seems difficult, then we
