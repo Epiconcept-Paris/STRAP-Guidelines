@@ -4,10 +4,6 @@ author: "Epiconcept"
 date: '2023'
 numbersections: true
 output:
-  word_document:
-    reference_docx: template/style.docx
-    toc: yes
-    toc_depth: '3'
   html_document:
     css: template/style.css
     number_sections: yes
@@ -16,6 +12,10 @@ output:
     toc_float: yes
   pdf_document:
     number_sections: yes
+    toc: yes
+    toc_depth: '3'
+  word_document:
+    reference_docx: template/style.docx
     toc: yes
     toc_depth: '3'
 editor_options: 
