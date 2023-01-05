@@ -10,12 +10,12 @@ output:
     toc: yes
     toc_depth: 3
     toc_float: yes
-  pdf_document:
-    number_sections: yes
-    toc: yes
-    toc_depth: '3'
   word_document:
     reference_docx: template/style.docx
+    toc: yes
+    toc_depth: '3'
+  pdf_document:
+    number_sections: yes
     toc: yes
     toc_depth: '3'
 editor_options: 
@@ -32,7 +32,7 @@ library(dplyr)
 
 # Introduction
 
-The Epidemiology team aims to harmonise its R coding style across projects.
+The Epidemiology team aims to harmonise its R coding style and practices across projects.
 
 This document describes the style that we aim to apply. It is based on <https://style.tidyverse.org/index.html>, initially derived from Google's original R style guide <https://google.github.io/styleguide/Rguide.html>.
 
