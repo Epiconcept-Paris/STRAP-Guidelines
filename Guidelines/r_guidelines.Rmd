@@ -101,7 +101,7 @@ VACCINE_DELAY <- 14
 
 Use a special `camelCase` for function names (first letter in lower case) and `lower case` for its arguments.
 
-Because your function should reflect an action, start your function name with a verb (see also the fllowing section [Function name]).
+Because your function should reflect an action, start your function name with a verb (see also the following section [Function name]).
 
 ```{r}
 # Good
@@ -267,25 +267,27 @@ Add comments to your code! Uncommented code will be very difficult to maintain. 
 They should mainly explain **why** you are doing something. Comments are there to help people who do not know your project to understand your objectives. You don't need to explain the R syntax except for tricky constructions.
 
 ```{r}
-# Bad
+# >> Not very informative
 # Renaming variable
 ```
 
 ```{r}
-# Better
-# Renaming variable according to the data dictionary stored in 'whatever_data_disctionnary.csv'
+# >> Better
+# Renaming variable according to the data dictionary 
+#  stored in 'whatever_data_dictionnary.csv'
 ```
 
 Another example:
 
 ```{r}
-# Bad
+# >> Not very informative
 # Checking data
 ```
 
 ```{r}
-# Better
-# Checking for incorrect date format in vaccination dates to build list of inconsistencies (sent to country)
+# >> Better
+# Checking for incorrect date format in vaccination dates 
+#  to build list of inconsistencies (sent to country)
 ```
 
 # R Studio snippets
@@ -352,24 +354,24 @@ Code to be inserted into snippets file:
 ```{r}
 # Project Name : I-MOVE-COVID-19
 # Script Name  : restriction flowchart countries surveillance.do
-# Summary      : Flowcharts that show the original data received, and the restrictions to the final data
+# Summary      : Flowcharts that show the original data received, 
+#                 and the restrictions to the final data
 # Date created: August 2020
 # Author       : Esther Kissling
 # Date reviewed:
 # Reviewed by  :
 
-# ---------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------
 # Description : 
-# This do-file displays the original data received by country and shows all the records dropped
-# due to restrictions until the final dataset.
-# While really this is an analysis do-file, it is used for data validation, so we keep it here
-# (for the moment).
-# The output automatically goes to the Excel spreadsheet "Restrictions flowchart surveillance.xlsx" - 
-#   in the folder Excel/data validation 
+#' This do-file displays the original data received by country 
+#' and shows all the records dropped due to restrictions until the final dataset.
+#' While really this is an analysis do-file, it is used for data validation, 
+#' so we keep it here (for the moment).
+#' The output automatically goes to the Excel spreadsheet 
+#' "Restrictions flowchart surveillance.xlsx" - in the folder Excel/data validation 
 # 
 
-
-# ---------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------
 # Log version : 
 
 ```
@@ -382,7 +384,7 @@ When working on the development/improvement of an R package, just a few rules to
 2.  Always adjust the **`NEWS.md`** according to your modifications.
 3.  Strive to add some **automated tests** for any new function that you may include in the package.
 
-## Help page with `roxygen2` package
+## Help page with `roxygen2` package {#roxygen}
 
 You can insert a roxygen skeleton using the following R Studio keyboard shortcut: place your cursor anywhere in the function that you wish to document and press `Alt + Ctrl + Shift + r`.
 
@@ -427,7 +429,7 @@ The `NEWS.md` file will then appear on the CRAN as a nice HTML page: <https://cr
 
 You can use `usethis::use_news_md()` to initiate the `NEWS.md` file.
 
-## Test with `testthat` package
+## Test with `testthat` package {#testthat}
 
 To include automated tests in your package, we will use the `testthat` package.
 
@@ -585,6 +587,43 @@ gitcreds_set()
     -   See .gitignore file to identify files that will be ignored by GitHub
 -   If more than one person is working one the same project it's recommended to use branches
     -   Name your branch with the current work you are doing in the project (e.g. "excel_outputs")
+
+# Procedure for package deployment
+
+## New branch on GitHub
+
+When we aim create new features, new functions in our R package that is already used in production by our colleagues, we strongly recommend **to create a new branch** on the package GitHub repository. Name your branch according to the work you plan to do on the package.
+
+Working on this *work in progress* version will allow you to avoid any conflict you may create with your colleagues using the package.
+
+## Working on the package
+
+You can now create your **new functions**. Please remember to add as much information as possible in the **help page** of your function (see section [Help page with roxygen2 package](#roxygen)).
+
+It is nice to also create a **vignette** explaining the new feature you have implemented. Adding example code to your vignette also allows to test the functions you have created.
+
+If possible, try to add tests for each function you create (see section [Test with testthat package](#testthat)).
+
+## Building
+
+Make sure that you regularly build/install `devtools::install()` (shortcut: `Ctrl + Shift + B`) and check `devtools::check()` (shortcut: `Ctrl + Shift + E`) your package.
+
+We must end up with no error, warning nor note.
+
+## Procedure for deployment
+
+Once we are happy with our changes to the packages:
+
+1)  Create a pull request from the `main` branch to your branch, in order to retrieve all recent commits that your *work in progress* branch might have missed.
+2)  Solve any conflict that might appear, and merge the recent commits from the `main` to your branch.
+3)  Now that your branch is up-to-date, increase the package version in the `DESCRIPTION` file and document the `NEWS.md` file according to your changes.
+4)  Test your new version of the package on a running project
+    -   Ask your colleague to make a full copy the project folder
+    -   Install again the package on your colleague's computer from your branch: Switch branch, build/install and check the package
+    -   Run the project from scratch and check the outputs
+5)  If everything goes well, then you can merge your branch in the `main` branch.
+6)  Create a **pre-release** on GitHub
+7)  Inform the team of the new version of the package and describe the new features implemented. Please do not hesitate to share any documentation that you might have create (e.g. vignette, help page, NEWS, etc).
 
 # Conclusion
 

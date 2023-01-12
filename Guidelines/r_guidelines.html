@@ -1561,7 +1561,7 @@ VACCINE_DELAY &lt;- 14</code></pre>
 <p>Use a special <code>camelCase</code> for function names (first letter
 in lower case) and <code>lower case</code> for its arguments.</p>
 <p>Because your function should reflect an action, start your function
-name with a verb (see also the fllowing section <a href="#function-name">Function name</a>).</p>
+name with a verb (see also the following section <a href="#function-name">Function name</a>).</p>
 <pre class="r"><code># Good
 doNothing &lt;- function(x, y) {
   return()
@@ -1766,15 +1766,17 @@ code.</p>
 something. Comments are there to help people who do not know your
 project to understand your objectives. You don’t need to explain the R
 syntax except for tricky constructions.</p>
-<pre class="r"><code># Bad
+<pre class="r"><code># &gt;&gt; Not very informative
 # Renaming variable</code></pre>
-<pre class="r"><code># Better
-# Renaming variable according to the data dictionary stored in &#39;whatever_data_disctionnary.csv&#39;</code></pre>
+<pre class="r"><code># &gt;&gt; Better
+# Renaming variable according to the data dictionary 
+#  stored in &#39;whatever_data_dictionnary.csv&#39;</code></pre>
 <p>Another example:</p>
-<pre class="r"><code># Bad
+<pre class="r"><code># &gt;&gt; Not very informative
 # Checking data</code></pre>
-<pre class="r"><code># Better
-# Checking for incorrect date format in vaccination dates to build list of inconsistencies (sent to country)</code></pre>
+<pre class="r"><code># &gt;&gt; Better
+# Checking for incorrect date format in vaccination dates 
+#  to build list of inconsistencies (sent to country)</code></pre>
 </div>
 </div>
 <div id="r-studio-snippets" class="section level1" number="5">
@@ -1859,24 +1861,24 @@ can put it at the top of each script)</p>
 use</h2>
 <pre class="r"><code># Project Name : I-MOVE-COVID-19
 # Script Name  : restriction flowchart countries surveillance.do
-# Summary      : Flowcharts that show the original data received, and the restrictions to the final data
+# Summary      : Flowcharts that show the original data received, 
+#                 and the restrictions to the final data
 # Date created: August 2020
 # Author       : Esther Kissling
 # Date reviewed:
 # Reviewed by  :
 
-# ---------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------
 # Description : 
-# This do-file displays the original data received by country and shows all the records dropped
-# due to restrictions until the final dataset.
-# While really this is an analysis do-file, it is used for data validation, so we keep it here
-# (for the moment).
-# The output automatically goes to the Excel spreadsheet &quot;Restrictions flowchart surveillance.xlsx&quot; - 
-#   in the folder Excel/data validation 
+#&#39; This do-file displays the original data received by country 
+#&#39; and shows all the records dropped due to restrictions until the final dataset.
+#&#39; While really this is an analysis do-file, it is used for data validation, 
+#&#39; so we keep it here (for the moment).
+#&#39; The output automatically goes to the Excel spreadsheet 
+#&#39; &quot;Restrictions flowchart surveillance.xlsx&quot; - in the folder Excel/data validation 
 # 
 
-
-# ---------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------
 # Log version : </code></pre>
 </div>
 </div>
@@ -1894,7 +1896,7 @@ your modifications.</li>
 <li>Strive to add some <strong>automated tests</strong> for any new
 function that you may include in the package.</li>
 </ol>
-<div id="help-page-with-roxygen2-package" class="section level2" number="6.1">
+<div id="roxygen" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> Help page with
 <code>roxygen2</code> package</h2>
 <p>You can insert a roxygen skeleton using the following R Studio
@@ -1949,7 +1951,7 @@ HTML page: <a href="https://cran.r-project.org/web/packages/EpiReport/news/news.
 <p>You can use <code>usethis::use_news_md()</code> to initiate the
 <code>NEWS.md</code> file.</p>
 </div>
-<div id="test-with-testthat-package" class="section level2" number="6.3">
+<div id="testthat" class="section level2" number="6.3">
 <h2><span class="header-section-number">6.3</span> Test with
 <code>testthat</code> package</h2>
 <p>To include automated tests in your package, we will use the
@@ -2176,8 +2178,74 @@ recommended to use branches
 </ul>
 </div>
 </div>
-<div id="conclusion" class="section level1" number="8">
-<h1><span class="header-section-number">8</span> Conclusion</h1>
+<div id="procedure-for-package-deployment" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> Procedure for package
+deployment</h1>
+<div id="new-branch-on-github" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> New branch on
+GitHub</h2>
+<p>When we aim create new features, new functions in our R package that
+is already used in production by our colleagues, we strongly recommend
+<strong>to create a new branch</strong> on the package GitHub
+repository. Name your branch according to the work you plan to do on the
+package.</p>
+<p>Working on this <em>work in progress</em> version will allow you to
+avoid any conflict you may create with your colleagues using the
+package.</p>
+</div>
+<div id="working-on-the-package" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Working on the
+package</h2>
+<p>You can now create your <strong>new functions</strong>. Please
+remember to add as much information as possible in the <strong>help
+page</strong> of your function (see section <a href="#roxygen">Help page
+with roxygen2 package</a>).</p>
+<p>It is nice to also create a <strong>vignette</strong> explaining the
+new feature you have implemented. Adding example code to your vignette
+also allows to test the functions you have created.</p>
+<p>If possible, try to add tests for each function you create (see
+section <a href="#testthat">Test with testthat package</a>).</p>
+</div>
+<div id="building" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> Building</h2>
+<p>Make sure that you regularly build/install
+<code>devtools::install()</code> (shortcut:
+<code>Ctrl + Shift + B</code>) and check <code>devtools::check()</code>
+(shortcut: <code>Ctrl + Shift + E</code>) your package.</p>
+<p>We must end up with no error, warning nor note.</p>
+</div>
+<div id="procedure-for-deployment" class="section level2" number="8.4">
+<h2><span class="header-section-number">8.4</span> Procedure for
+deployment</h2>
+<p>Once we are happy with our changes to the packages:</p>
+<ol style="list-style-type: decimal">
+<li>Create a pull request from the <code>main</code> branch to your
+branch, in order to retrieve all recent commits that your <em>work in
+progress</em> branch might have missed.</li>
+<li>Solve any conflict that might appear, and merge the recent commits
+from the <code>main</code> to your branch.</li>
+<li>Now that your branch is up-to-date, increase the package version in
+the <code>DESCRIPTION</code> file and document the <code>NEWS.md</code>
+file according to your changes.</li>
+<li>Test your new version of the package on a running project
+<ul>
+<li>Ask your colleague to make a full copy the project folder</li>
+<li>Install again the package on your colleague’s computer from your
+branch: Switch branch, build/install and check the package</li>
+<li>Run the project from scratch and check the outputs</li>
+</ul></li>
+<li>If everything goes well, then you can merge your branch in the
+<code>main</code> branch.</li>
+<li>Create a <strong>pre-release</strong> on GitHub</li>
+<li>Inform the team of the new version of the package and describe the
+new features implemented. Please do not hesitate to share any
+documentation that you might have create (e.g. vignette, help page,
+NEWS, etc).</li>
+</ol>
+</div>
+</div>
+<div id="conclusion" class="section level1" number="9">
+<h1><span class="header-section-number">9</span> Conclusion</h1>
 <p>Thank you for making it up to the end of this guide!! But remember…
 this is just a guide, it was not developed to cause us more problems
 than it solves ! A guide is here to help as much as possible, it is not
