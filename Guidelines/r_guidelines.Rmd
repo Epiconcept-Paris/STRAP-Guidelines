@@ -1,7 +1,7 @@
 ---
 title: "Epidemiology Team R Guidelines"
 author: "Epiconcept"
-date: '2023'
+date: '2023-01-12'
 numbersections: true
 output:
   html_document:
@@ -10,12 +10,12 @@ output:
     toc: yes
     toc_depth: 3
     toc_float: yes
-  word_document:
-    reference_docx: template/style.docx
-    toc: yes
-    toc_depth: '3'
   pdf_document:
     number_sections: yes
+    toc: yes
+    toc_depth: '3'
+  word_document:
+    reference_docx: template/style.docx
     toc: yes
     toc_depth: '3'
 editor_options: 
