@@ -10,12 +10,12 @@ output:
     toc: yes
     toc_depth: 3
     toc_float: yes
-  pdf_document:
-    number_sections: yes
-    toc: yes
-    toc_depth: '3'
   word_document:
     reference_docx: template/style.docx
+    toc: yes
+    toc_depth: '3'
+  pdf_document:
+    number_sections: yes
     toc: yes
     toc_depth: '3'
 editor_options: 
@@ -461,7 +461,7 @@ Additional references: <https://happygitwithr.com/>.
 
 To secure our R scripts (track/revert changes), and to allow collaborative development, we will use a version control system and follow the **workflow** below:
 
-![Figure 1. Workflow around R, R Studio, Git and GitHub](images/RGitHubWorkflow.png)
+![**Figure 1.** Workflow around R, R Studio, Git and GitHub](images/RGitHubWorkflow.png)
 
 **Repository** also called 'repo':
 
@@ -575,6 +575,56 @@ gitcreds_get()
 gitcreds_set()
 ```
 
+## Create a .gitignore file
+
+Working with GitHub, we do not want to push all our files to the shared repository. Either because some files are too big for GitHub, or because they contain some sensitive information (e.g., passwords, tokens, SQL queries, etc.) The file `.gitignore` will allow to list all the files or folders that will be ignored by Git.
+
+When creating your GitHub repository, please note that you can add a default `.gitignore` file. A list of template if even available. Please select the template dedicated to R projects.
+
+![**Figure 2.** Adding .gitignore file when creating repo on GitHub](images/GitHub_gitignore.png){width="428"}
+
+Please find below an example of well-set `.gitignore` file.
+
+    # History files
+    .Rhistory
+    .Rapp.history
+
+    # Session Data files
+    .RData
+
+    # User-specific files
+    .Ruserdata
+
+    # Example code in package build process
+    *-Ex.R
+
+    # Output files from R CMD build
+    /*.tar.gz
+
+    # Output files from R CMD check
+    /*.Rcheck/
+
+    # RStudio files
+    .Rproj.user/
+
+    # produced vignettes
+    vignettes/*.html
+    vignettes/*.pdf
+
+    # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
+    .httr-oauth
+
+    # knitr and R markdown default cache directories
+    *_cache/
+    /cache/
+
+    # Temporary files created by R markdown
+    *.utf8.md
+    *.knit.md
+
+    # R Environment Variables
+    .Renviron
+
 ## Basic recommendations
 
 -   Always start working in RStudio with a pull first, in order to get the latest version of the code from the remote repository
@@ -624,6 +674,31 @@ Once we are happy with our changes to the packages:
 5)  If everything goes well, then you can merge your branch in the `main` branch.
 6)  Create a **pre-release** on GitHub
 7)  Inform the team of the new version of the package and describe the new features implemented. Please do not hesitate to share any documentation that you might have create (e.g. vignette, help page, NEWS, etc).
+
+# Procedure for code review
+
+In a **peer review** process, author of the scripts and the reviewer go through the code together either sitting side by side, or using TeamViewer tool. The reviewer would be the one running the code and would ask tons of questions to the author!
+
+However, for a **code review** process, the reviewer is on her/his own, reading the code alone. In that case, communication and feedback might be trickier. Which is why we suggest to follow the process below:
+
+-   The reviewer:
+
+    -   Clone the project locally on her/his computer
+    -   Create a new branch that could be labelled like: `pr_jsw_2023-01-01` (standing for peer review, your trigram and the date). Remember to always pull once you are on the branch!
+    -   Run the code entirely to check that it is working properly
+    -   Parse the code to check for any issues or any improvements that could be suggested to the author
+    -   Make suggestions directly in the code
+        -   Start your comment with: `# PR_JSW` (standing for peer review and your trigram)
+        -   Comment the initial code that you suggest to change, do not delete it
+        -   If long comment, end your suggested paragraph with the end comment: `# END PR_JSW`
+    -   Once the review is finalised, commit suggestions in a unique Git commit so that we can easily spot the differences with the initial code by opening the commit in GitHub (as you know additions will be highlighted in green, deletions in red)
+
+-   The author of the code:
+
+    -   Can now have a look at your review, and directly work on the modified version of the code (i.e., on the dedicated branch)
+    -   Try to never comment on a comment, better to directly chat with the person to avoid endless written discussions within the code
+    -   Sort out the comments/suggestions (i.e., validate or ignore) by deleting the flag `# PR_CLZ`
+    -   Finally, create a pull request from the peer review branch to the main branch to retrieve all validated modifications
 
 # Conclusion
 
