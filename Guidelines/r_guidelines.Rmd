@@ -461,7 +461,7 @@ Additional references: <https://happygitwithr.com/>.
 
 To secure our R scripts (track/revert changes), and to allow collaborative development, we will use a version control system and follow the **workflow** below:
 
-![**Figure 1.** Workflow around R, R Studio, Git and GitHub](images/RGitHubWorkflow.png)
+![***Figure 1.** Workflow around R, R Studio, Git and GitHub*](images/RGitHubWorkflow.png)
 
 **Repository** also called 'repo':
 
@@ -581,7 +581,7 @@ Working with GitHub, we do not want to push all our files to the shared reposito
 
 When creating your GitHub repository, please note that you can add a default `.gitignore` file. A list of template if even available. Please select the template dedicated to R projects.
 
-![**Figure 2.** Adding .gitignore file when creating repo on GitHub](images/GitHub_gitignore.png){width="428"}
+![***Figure 2.** Adding .gitignore file when creating repo on GitHub*](images/GitHub_gitignore.png){width="428"}
 
 Please find below an example of well-set `.gitignore` file.
 
@@ -624,6 +624,19 @@ Please find below an example of well-set `.gitignore` file.
 
     # R Environment Variables
     .Renviron
+
+## Repo settings
+
+### Collaborators and teams
+
+Good practice to always add the Epidemio team to your repo with:
+
+-   Click on "Add teams"
+-   Search for "team-epidemio"
+-   Select the role of your choice for your Epi colleagues: Read / Write / etc.
+-   Add the team to your repo.
+
+![***Figure 3.** List of collaborators roles available on GitHub*](images/GitHub_role.png)
 
 ## Basic recommendations
 
