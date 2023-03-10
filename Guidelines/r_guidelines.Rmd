@@ -216,7 +216,9 @@ who %>% tidyr::pivot_longer(
   names_to = "variable",
   values_to = "value"
 )
+```
 
+```{r, eval = FALSE}
 # Bad
 who %>% tidyr::pivot_longer(
   new_sp_m014:newrel_f65,
@@ -637,6 +639,18 @@ Good practice to always add the Epidemio team to your repo with:
 -   Add the team to your repo.
 
 ![***Figure 3.** List of collaborators roles available on GitHub*](images/GitHub_role.png)
+
+### Outside collaborators
+
+If you need to invite an external collaborator to your repository, this person needs a "seat" in Epiconcept GitHub.
+
+-   If this person is already collaborating in another Epiconcept repository, then she/he might already have a "seat" and you can directly add this person to your repository.
+-   If this person does not have a "seat", then you will get an error message while trying to add her/him.
+    -   ***\>\> Please create a Jira ticket to the Framework team, so that they can dedicate a "seat" for your collaborator***
+
+    -   If there is no immediate seat available in Epiconcept GitHub, then GitHub administrators will possibly have to buy more seats for the company which might introduce some delay in the process.
+
+*Please keep in mind that Epiconcept company has a limited number of seats (for Epiconcept colleagues and outside collaborators). Therefore, once your project is finalised, please remove your outside collaborators as much as possible. This will automatically free a "seat" in Epiconcept GitHub for future projects.*
 
 ## Basic recommendations
 

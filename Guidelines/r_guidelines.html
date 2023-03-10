@@ -1679,7 +1679,7 @@ packages authors).</p>
 who[1:6, 1:8]</code></pre>
 <pre><code>## # A tibble: 6 x 8
 ##   country   iso2  iso3   year new_sp_m014 new_sp_m1524 new_sp_m2534 new_sp_m3544
-##   &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;int&gt;       &lt;int&gt;        &lt;int&gt;        &lt;int&gt;        &lt;int&gt;
+##   &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
 ## 1 Afghanis~ AF    AFG    1980          NA           NA           NA           NA
 ## 2 Afghanis~ AF    AFG    1981          NA           NA           NA           NA
 ## 3 Afghanis~ AF    AFG    1982          NA           NA           NA           NA
@@ -1694,7 +1694,7 @@ who %&gt;% tidyr::pivot_longer(
 )</code></pre>
 <pre><code>## # A tibble: 405,440 x 6
 ##    country     iso2  iso3   year variable     value
-##    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;chr&gt;        &lt;int&gt;
+##    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
 ##  1 Afghanistan AF    AFG    1980 new_sp_m014     NA
 ##  2 Afghanistan AF    AFG    1980 new_sp_m1524    NA
 ##  3 Afghanistan AF    AFG    1980 new_sp_m2534    NA
@@ -1712,20 +1712,6 @@ who %&gt;% tidyr::pivot_longer(
   &quot;variable&quot;,
   values_to = &quot;value&quot;
 )</code></pre>
-<pre><code>## # A tibble: 405,440 x 6
-##    country     iso2  iso3   year variable     value
-##    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;chr&gt;        &lt;int&gt;
-##  1 Afghanistan AF    AFG    1980 new_sp_m014     NA
-##  2 Afghanistan AF    AFG    1980 new_sp_m1524    NA
-##  3 Afghanistan AF    AFG    1980 new_sp_m2534    NA
-##  4 Afghanistan AF    AFG    1980 new_sp_m3544    NA
-##  5 Afghanistan AF    AFG    1980 new_sp_m4554    NA
-##  6 Afghanistan AF    AFG    1980 new_sp_m5564    NA
-##  7 Afghanistan AF    AFG    1980 new_sp_m65      NA
-##  8 Afghanistan AF    AFG    1980 new_sp_f014     NA
-##  9 Afghanistan AF    AFG    1980 new_sp_f1524    NA
-## 10 Afghanistan AF    AFG    1980 new_sp_f2534    NA
-## # ... with 405,430 more rows</code></pre>
 </div>
 </div>
 <div id="code-documentation" class="section level1" number="4">
@@ -2130,8 +2116,14 @@ usethis::gh_token_help()
 usethis::git_sitrep()</code></pre>
 <pre><code>## * GitHub host: &#39;https://github.com&#39;
 ## * Personal access token for &#39;https://github.com&#39;: &#39;&lt;discovered&gt;&#39;
-## x Can&#39;t get user information for this token.
-## Error in curl::curl_fetch_memory(url, handle = handle): Timeout was reached: [api.github.com] Connection timed out after 10008 milliseconds</code></pre>
+## * GitHub user: &#39;loremerdrignac&#39;
+## * Token scopes: &#39;gist, repo, workflow&#39;
+## x Token lacks recommended scopes:
+##   - &#39;user:email&#39;: needed to read user&#39;s email addresses
+##   Consider re-creating your PAT with the missing scopes.
+##   `create_github_token()` defaults to the recommended scopes.
+## x Can&#39;t retrieve registered email addresses from GitHub.
+##   Consider re-creating your PAT with the &#39;user&#39; or at least &#39;user:email&#39; scope.</code></pre>
 <pre class="r"><code># Note: if something went wrong, &#39;gitcreds&#39; better manages PAT conflicts
 library(gitcreds)
 gitcreds_get()
@@ -2213,6 +2205,32 @@ teams</h3>
 <p class="caption"><em><strong>Figure 3.</strong> List of collaborators
 roles available on GitHub</em></p>
 </div>
+</div>
+<div id="outside-collaborators" class="section level3" number="7.5.2">
+<h3><span class="header-section-number">7.5.2</span> Outside
+collaborators</h3>
+<p>If you need to invite an external collaborator to your repository,
+this person needs a “seat” in Epiconcept GitHub.</p>
+<ul>
+<li>If this person is already collaborating in another Epiconcept
+repository, then she/he might already have a “seat” and you can directly
+add this person to your repository.</li>
+<li>If this person does not have a “seat”, then you will get an error
+message while trying to add her/him.
+<ul>
+<li><p><strong><em>&gt;&gt; Please create a Jira ticket to the Framework
+team, so that they can dedicate a “seat” for your
+collaborator</em></strong></p></li>
+<li><p>If there is no immediate seat available in Epiconcept GitHub,
+then GitHub administrators will possibly have to buy more seats for the
+company which might introduce some delay in the process.</p></li>
+</ul></li>
+</ul>
+<p><em>Please keep in mind that Epiconcept company has a limited number
+of seats (for Epiconcept colleagues and outside collaborators).
+Therefore, once your project is finalised, please remove your outside
+collaborators as much as possible. This will automatically free a “seat”
+in Epiconcept GitHub for future projects.</em></p>
 </div>
 </div>
 <div id="basic-recommendations" class="section level2" number="7.6">
