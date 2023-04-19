@@ -1,7 +1,7 @@
 ---
 title: "Epidemiology Team R Guidelines"
 author: "Epiconcept"
-date: '2023-01-12'
+date: '2023-04-19'
 numbersections: true
 output:
   html_document:
@@ -320,25 +320,27 @@ Write the name of the snippet (i.e., the snippet keyword) you want to include in
 
 Code to be inserted into snippets file:
 
-    snippet epihead
-      # Project Name : 
-      # Script Name  :
-      # GitHub repo  : 
-      # Summary      : 
-      # Date created : 
-      # Author       : 
-      # Date reviewed:
-      # Reviewed by  :
-      
-      # Description -------------------------------------------------------------
-      #' 
-      
-      # Changes Log -------------------------------------------------------------
-      #' 
-      
-      # START of SCRIPT  --------------------------------------------------------
-      
-      # END of SCRIPT  ----------------------------------------------------------
+```         
+snippet epihead
+  # Project Name : 
+  # Script Name  :
+  # GitHub repo  : 
+  # Summary      : 
+  # Date created : 
+  # Author       : 
+  # Date reviewed:
+  # Reviewed by  :
+  
+  # Description -------------------------------------------------------------
+  #' 
+  
+  # Changes Log -------------------------------------------------------------
+  #' 
+  
+  # START of SCRIPT  --------------------------------------------------------
+  
+  # END of SCRIPT  ----------------------------------------------------------
+```
 
 ### `todo`
 
@@ -346,10 +348,36 @@ Code to be inserted into snippets file:
 
 Code to be inserted into snippets file:
 
-    snippet todo
-      # -------------------------------------------------------------------------
-      # Todo : ${1:todo}
-      # -------------------------------------------------------------------------
+```         
+snippet todo
+  # -------------------------------------------------------------------------
+  # Todo : ${1:todo}
+  # -------------------------------------------------------------------------
+```
+
+### `roxy`
+
+**Aim:** To insert the minimal roxygen2 skeleton above the function definition.
+
+Code to be inserted into snippets file:
+
+```         
+snippet roxy
+  #' Title
+  #' 
+  #' Description
+  #' 
+  #' @param
+  #' @returns
+  #' @export
+  #' @author STRAP team \email{strap@epiconcept.fr}
+  #' @seealso
+  #' For more details see the link below to access the vignette:
+  #' \href{../doc/epiuf_package.html}{\code{vignette("epiuf_package")}}
+  #'
+  #' @examples
+  #' 
+```
 
 ## Example of snippet use
 
@@ -407,7 +435,7 @@ myFunction <- function(x, y) {
 }
 ```
 
-For those who want to go further, you can also create a dedicated snippet if you wish a roxygen skeleton more complete (see section [R Studio snippets]).
+For those who want to go further, you can also create a dedicated snippet if you wish a roxygen skeleton more complete (see section [`roxy`] in [R Studio snippets]).
 
 Some nice guidelines available here: <https://r-pkgs.org/man.html>.
 
@@ -587,45 +615,47 @@ When creating your GitHub repository, please note that you can add a default `.g
 
 Please find below an example of well-set `.gitignore` file.
 
-    # History files
-    .Rhistory
-    .Rapp.history
+```         
+# History files
+.Rhistory
+.Rapp.history
 
-    # Session Data files
-    .RData
+# Session Data files
+.RData
 
-    # User-specific files
-    .Ruserdata
+# User-specific files
+.Ruserdata
 
-    # Example code in package build process
-    *-Ex.R
+# Example code in package build process
+*-Ex.R
 
-    # Output files from R CMD build
-    /*.tar.gz
+# Output files from R CMD build
+/*.tar.gz
 
-    # Output files from R CMD check
-    /*.Rcheck/
+# Output files from R CMD check
+/*.Rcheck/
 
-    # RStudio files
-    .Rproj.user/
+# RStudio files
+.Rproj.user/
 
-    # produced vignettes
-    vignettes/*.html
-    vignettes/*.pdf
+# produced vignettes
+vignettes/*.html
+vignettes/*.pdf
 
-    # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
-    .httr-oauth
+# OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
+.httr-oauth
 
-    # knitr and R markdown default cache directories
-    *_cache/
-    /cache/
+# knitr and R markdown default cache directories
+*_cache/
+/cache/
 
-    # Temporary files created by R markdown
-    *.utf8.md
-    *.knit.md
+# Temporary files created by R markdown
+*.utf8.md
+*.knit.md
 
-    # R Environment Variables
-    .Renviron
+# R Environment Variables
+.Renviron
+```
 
 ## Repo settings
 

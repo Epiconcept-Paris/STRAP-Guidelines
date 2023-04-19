@@ -11,7 +11,7 @@
 
 <meta name="author" content="Epiconcept" />
 
-<meta name="date" content="2023-01-12" />
+<meta name="date" content="2023-04-19" />
 
 <title>Epidemiology Team R Guidelines</title>
 
@@ -1488,7 +1488,7 @@ border-radius: 0px;
 
 <h1 class="title toc-ignore">Epidemiology Team R Guidelines</h1>
 <h4 class="author">Epiconcept</h4>
-<h4 class="date">2023-01-12</h4>
+<h4 class="date">2023-04-19</h4>
 
 </div>
 
@@ -1677,22 +1677,22 @@ packages authors).</p>
 # Example dataset from WHO Global Tuberculosis Report
 # including counts of new TB cases recorded by group (see ?who)
 who[1:6, 1:8]</code></pre>
-<pre><code>## # A tibble: 6 x 8
+<pre><code>## # A tibble: 6 × 8
 ##   country   iso2  iso3   year new_sp_m014 new_sp_m1524 new_sp_m2534 new_sp_m3544
 ##   &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
-## 1 Afghanis~ AF    AFG    1980          NA           NA           NA           NA
-## 2 Afghanis~ AF    AFG    1981          NA           NA           NA           NA
-## 3 Afghanis~ AF    AFG    1982          NA           NA           NA           NA
-## 4 Afghanis~ AF    AFG    1983          NA           NA           NA           NA
-## 5 Afghanis~ AF    AFG    1984          NA           NA           NA           NA
-## 6 Afghanis~ AF    AFG    1985          NA           NA           NA           NA</code></pre>
+## 1 Afghanis… AF    AFG    1980          NA           NA           NA           NA
+## 2 Afghanis… AF    AFG    1981          NA           NA           NA           NA
+## 3 Afghanis… AF    AFG    1982          NA           NA           NA           NA
+## 4 Afghanis… AF    AFG    1983          NA           NA           NA           NA
+## 5 Afghanis… AF    AFG    1984          NA           NA           NA           NA
+## 6 Afghanis… AF    AFG    1985          NA           NA           NA           NA</code></pre>
 <pre class="r"><code># Good
 who %&gt;% tidyr::pivot_longer(
   cols = new_sp_m014:newrel_f65,
   names_to = &quot;variable&quot;,
   values_to = &quot;value&quot;
 )</code></pre>
-<pre><code>## # A tibble: 405,440 x 6
+<pre><code>## # A tibble: 405,440 × 6
 ##    country     iso2  iso3   year variable     value
 ##    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
 ##  1 Afghanistan AF    AFG    1980 new_sp_m014     NA
@@ -1705,7 +1705,7 @@ who %&gt;% tidyr::pivot_longer(
 ##  8 Afghanistan AF    AFG    1980 new_sp_f014     NA
 ##  9 Afghanistan AF    AFG    1980 new_sp_f1524    NA
 ## 10 Afghanistan AF    AFG    1980 new_sp_f2534    NA
-## # ... with 405,430 more rows</code></pre>
+## # ℹ 405,430 more rows</code></pre>
 <pre class="r"><code># Bad
 who %&gt;% tidyr::pivot_longer(
   new_sp_m014:newrel_f65,
@@ -1841,6 +1841,28 @@ can put it at the top of each script)</p>
   # Todo : ${1:todo}
   # -------------------------------------------------------------------------</code></pre>
 </div>
+<div id="roxy" class="section level3" number="5.4.3">
+<h3><span class="header-section-number">5.4.3</span>
+<code>roxy</code></h3>
+<p><strong>Aim:</strong> To insert the minimal roxygen2 skeleton above
+the function definition.</p>
+<p>Code to be inserted into snippets file:</p>
+<pre><code>snippet roxy
+  #&#39; Title
+  #&#39; 
+  #&#39; Description
+  #&#39; 
+  #&#39; @param
+  #&#39; @returns
+  #&#39; @export
+  #&#39; @author STRAP team \email{strap@epiconcept.fr}
+  #&#39; @seealso
+  #&#39; For more details see the link below to access the vignette:
+  #&#39; \href{../doc/epiuf_package.html}{\code{vignette(&quot;epiuf_package&quot;)}}
+  #&#39;
+  #&#39; @examples
+  #&#39; </code></pre>
+</div>
 </div>
 <div id="example-of-snippet-use" class="section level2" number="5.5">
 <h2><span class="header-section-number">5.5</span> Example of snippet
@@ -1903,7 +1925,8 @@ myFunction &lt;- function(x, y) {
   return()
 }</code></pre>
 <p>For those who want to go further, you can also create a dedicated
-snippet if you wish a roxygen skeleton more complete (see section <a href="#r-studio-snippets">R Studio snippets</a>).</p>
+snippet if you wish a roxygen skeleton more complete (see section <a href="#roxy"><code>roxy</code></a> in <a href="#r-studio-snippets">R
+Studio snippets</a>).</p>
 <p>Some nice guidelines available here: <a href="https://r-pkgs.org/man.html" class="uri">https://r-pkgs.org/man.html</a>.</p>
 </div>
 <div id="news.md-file" class="section level2" number="6.2">
@@ -2114,15 +2137,15 @@ credentials::set_github_pat(&quot;ghp_bkfpdlHFD5Vtmxgf6NXkJy0jxM&quot;)
 usethis::gh_token_help() 
 # Or with (for more inforation on your account)
 usethis::git_sitrep()</code></pre>
-<pre><code>## * GitHub host: &#39;https://github.com&#39;
-## * Personal access token for &#39;https://github.com&#39;: &#39;&lt;discovered&gt;&#39;
-## * GitHub user: &#39;loremerdrignac&#39;
-## * Token scopes: &#39;gist, repo, workflow&#39;
-## x Token lacks recommended scopes:
+<pre><code>## • GitHub host: &#39;https://github.com&#39;
+## • Personal access token for &#39;https://github.com&#39;: &#39;&lt;discovered&gt;&#39;
+## • GitHub user: &#39;loremerdrignac&#39;
+## • Token scopes: &#39;gist, repo, workflow&#39;
+## ✖ Token lacks recommended scopes:
 ##   - &#39;user:email&#39;: needed to read user&#39;s email addresses
 ##   Consider re-creating your PAT with the missing scopes.
 ##   `create_github_token()` defaults to the recommended scopes.
-## x Can&#39;t retrieve registered email addresses from GitHub.
+## ✖ Can&#39;t retrieve registered email addresses from GitHub.
 ##   Consider re-creating your PAT with the &#39;user&#39; or at least &#39;user:email&#39; scope.</code></pre>
 <pre class="r"><code># Note: if something went wrong, &#39;gitcreds&#39; better manages PAT conflicts
 library(gitcreds)
