@@ -9,13 +9,14 @@ output:
     number_sections: yes
     toc: yes
     toc_depth: 3
-    toc_float: yes
-  word_document:
-    reference_docx: template/style.docx
-    toc: yes
-    toc_depth: '3'
+    toc_float:
+      collapsed: no 
   pdf_document:
     number_sections: yes
+    toc: yes
+    toc_depth: '3'
+  word_document:
+    reference_docx: template/style.docx
     toc: yes
     toc_depth: '3'
 editor_options: 
@@ -226,6 +227,10 @@ who %>% tidyr::pivot_longer(
   values_to = "value"
 )
 ```
+
+## Function documentation
+
+Please make sure that you always develop your function together with an exhaustive `roxygen2` in-line documentation, even if the function is not part of an R package. See section below [Help page with roxygen2 package].
 
 # Code documentation
 
@@ -438,6 +443,56 @@ myFunction <- function(x, y) {
 For those who want to go further, you can also create a dedicated snippet if you wish a roxygen skeleton more complete (see section [`roxy`] in [R Studio snippets]).
 
 Some nice guidelines available here: <https://r-pkgs.org/man.html>.
+
+In the STRAP team, we recommend the following tags:
+
+-   `Title`
+
+    -   Should fit on one line
+    -   Be written in Sentence Case
+    -   Not end in a full stop
+
+-   `Description`
+
+    -   Should briefly describe what the function does
+
+-   `Details`
+
+    -   Long section proving all necessary details
+
+-   `@param`
+
+    -   Make sure you specify the type and format of each argument, possibly its structure too
+    -   If an argument has a fixed set of possible parameters (e.g., @param side Side to pad: `"left"` or `"right"`)
+    -   What the parameter does (use complete sentences). It is important to be as exhaustive and as precise as possible.
+    -   The potential default value.
+
+-   `@returns` to describe the function's expected output in terms of type/shape Function's output is as important as its inputs!
+
+-   `@examples`
+
+    -   Ideally, examples should demonstrate all possible conditions of use
+    -   Based on a realistic dummy dataset
+    -   R code needs to be executable and must work without errors as it is run when building the package
+        -   Tip!!! Wrap your code with `\dontrun{}` if for illustration purposes you still need to provide the user with non executable code.
+        -   Or with `try()` if you wish to show the error message
+    -   If too long, then write a vignette to complement!
+
+-   `@export` to export the function and make it available outside the package
+
+-   `@authors` to specify that you wrote this function
+
+-   `@seelaso` to add a link to other function's help page or URLs
+
+    -   Link to another help page: `[ggplot()]` or `\link{ggplot}`
+
+    -   Any link `\url{../.html}` or `\href{.../.html}{display}`
+
+    -   Reference to the vignette - Either the code to run to access it: \
+        `For more details see the help vignette: \code{vignette("xlsxUtils", package = "epiuf")}`
+
+    -   Or the link to the vignette: \
+        `For more details see the link below to access the vignette: \href{../doc/xlsxUtils.html}{\code{vignette("xlsxUtils")}}`
 
 ## `NEWS.md` file
 
@@ -659,7 +714,34 @@ vignettes/*.pdf
 
 ## Repo settings
 
-### Collaborators and teams
+### Access
+
+#### Collaborators
+
+If you need to invite a collaborator to your repository, this person needs to have a "seat" in Epiconcept GitHub.
+
+*Please keep in mind that **Epiconcept company has a limited number of seats** (for both Epiconcept colleagues and outside collaborators). Therefore, once your project is finalised, please remove your outside collaborators as soon as possible. This will automatically free a "seat" in Epiconcept GitHub for future projects.*
+
+There are two possible scenarios, both valid for Epiconcept colleagues and outside collaborators:
+
+-   Either [my collaborator has already access to an existing Epiconcept repository]{.underline}: then she/he already has a "seat" and you can directly add this person to your repository (which is usually the case for Epiconcept colleagues).
+-   Or [my collaborator does not currently have access to an exisitng Epiconcept repository]{.underline}: then she/he does not already have a dedicated "seat".
+    -   ***Please create a Jira ticket to the Framework Service Desk*** (link: <https://epiconcept.atlassian.net/servicedesk/customer/portal/13> )
+
+        -   Select "Support and questions"
+        -   Specify in the ticket description
+            -   the collaborator identity
+            -   if she/he is an Epiconcept collaborator or not
+            -   to which repositories the person needs access to
+            -   and why she/he needs this access
+
+    -   ***The Framework team will then invite your collaborator and dedicate a "seat" for her/him.***
+
+    -   Please note that if there is no immediate seat available in Epiconcept GitHub, then GitHub administrators will probably have to buy more seats for the company which might introduce some delay in the process.
+
+This procedure allows Epiconcept company to keep track of who has access to what for security and conformity reasons.
+
+#### Teams
 
 Good practice to always add the Epidemio team to your repo with:
 
@@ -669,18 +751,6 @@ Good practice to always add the Epidemio team to your repo with:
 -   Add the team to your repo.
 
 ![***Figure 3.** List of collaborators roles available on GitHub*](images/GitHub_role.png)
-
-### Outside collaborators
-
-If you need to invite an external collaborator to your repository, this person needs a "seat" in Epiconcept GitHub.
-
--   If this person is already collaborating in another Epiconcept repository, then she/he might already have a "seat" and you can directly add this person to your repository.
--   If this person does not have a "seat", then you will get an error message while trying to add her/him.
-    -   ***\>\> Please create a Jira ticket to the Framework team, so that they can dedicate a "seat" for your collaborator***
-
-    -   If there is no immediate seat available in Epiconcept GitHub, then GitHub administrators will possibly have to buy more seats for the company which might introduce some delay in the process.
-
-*Please keep in mind that Epiconcept company has a limited number of seats (for Epiconcept colleagues and outside collaborators). Therefore, once your project is finalised, please remove your outside collaborators as much as possible. This will automatically free a "seat" in Epiconcept GitHub for future projects.*
 
 ## Basic recommendations
 

@@ -1458,6 +1458,12 @@ font-size: 0.90em;
 .tocify .list-group-item {
 border-radius: 0px;
 }
+.tocify-subheader {
+display: inline;
+}
+.tocify-subheader .tocify-item {
+font-size: 0.95em;
+}
 </style>
 
 
@@ -1713,6 +1719,14 @@ who %&gt;% tidyr::pivot_longer(
   values_to = &quot;value&quot;
 )</code></pre>
 </div>
+<div id="function-documentation" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Function
+documentation</h2>
+<p>Please make sure that you always develop your function together with
+an exhaustive <code>roxygen2</code> in-line documentation, even if the
+function is not part of an R package. See section below [Help page with
+roxygen2 package].</p>
+</div>
 </div>
 <div id="code-documentation" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> Code documentation</h1>
@@ -1928,6 +1942,69 @@ myFunction &lt;- function(x, y) {
 snippet if you wish a roxygen skeleton more complete (see section <a href="#roxy"><code>roxy</code></a> in <a href="#r-studio-snippets">R
 Studio snippets</a>).</p>
 <p>Some nice guidelines available here: <a href="https://r-pkgs.org/man.html" class="uri">https://r-pkgs.org/man.html</a>.</p>
+<p>In the STRAP team, we recommend the following tags:</p>
+<ul>
+<li><p><code>Title</code></p>
+<ul>
+<li>Should fit on one line</li>
+<li>Be written in Sentence Case</li>
+<li>Not end in a full stop</li>
+</ul></li>
+<li><p><code>Description</code></p>
+<ul>
+<li>Should briefly describe what the function does</li>
+</ul></li>
+<li><p><code>Details</code></p>
+<ul>
+<li>Long section proving all necessary details</li>
+</ul></li>
+<li><p><code>@param</code></p>
+<ul>
+<li>Make sure you specify the type and format of each argument, possibly
+its structure too</li>
+<li>If an argument has a fixed set of possible parameters (e.g., <span class="citation">@param</span> side Side to pad: <code>&quot;left&quot;</code> or
+<code>&quot;right&quot;</code>)</li>
+<li>What the parameter does (use complete sentences). It is important to
+be as exhaustive and as precise as possible.</li>
+<li>The potential default value.</li>
+</ul></li>
+<li><p><code>@returns</code> to describe the function’s expected output
+in terms of type/shape Function’s output is as important as its
+inputs!</p></li>
+<li><p><code>@examples</code></p>
+<ul>
+<li>Ideally, examples should demonstrate all possible conditions of
+use</li>
+<li>Based on a realistic dummy dataset</li>
+<li>R code needs to be executable and must work without errors as it is
+run when building the package
+<ul>
+<li>Tip!!! Wrap your code with <code>\dontrun{}</code> if for
+illustration purposes you still need to provide the user with non
+executable code.</li>
+<li>Or with <code>try()</code> if you wish to show the error
+message</li>
+</ul></li>
+<li>If too long, then write a vignette to complement!</li>
+</ul></li>
+<li><p><code>@export</code> to export the function and make it available
+outside the package</p></li>
+<li><p><code>@authors</code> to specify that you wrote this
+function</p></li>
+<li><p><code>@seelaso</code> to add a link to other function’s help page
+or URLs</p>
+<ul>
+<li><p>Link to another help page: <code>[ggplot()]</code> or
+<code>\link{ggplot}</code></p></li>
+<li><p>Any link <code>\url{../.html}</code> or
+<code>\href{.../.html}{display}</code></p></li>
+<li><p>Reference to the vignette - Either the code to run to access
+it:<br />
+<code>For more details see the help vignette: \code{vignette(&quot;xlsxUtils&quot;, package = &quot;epiuf&quot;)}</code></p></li>
+<li><p>Or the link to the vignette:<br />
+<code>For more details see the link below to access the vignette: \href{../doc/xlsxUtils.html}{\code{vignette(&quot;xlsxUtils&quot;)}}</code></p></li>
+</ul></li>
+</ul>
 </div>
 <div id="news.md-file" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> <code>NEWS.md</code>
@@ -2212,9 +2289,55 @@ vignettes/*.pdf
 </div>
 <div id="repo-settings" class="section level2" number="7.5">
 <h2><span class="header-section-number">7.5</span> Repo settings</h2>
-<div id="collaborators-and-teams" class="section level3" number="7.5.1">
-<h3><span class="header-section-number">7.5.1</span> Collaborators and
-teams</h3>
+<div id="access" class="section level3" number="7.5.1">
+<h3><span class="header-section-number">7.5.1</span> Access</h3>
+<div id="collaborators" class="section level4" number="7.5.1.1">
+<h4><span class="header-section-number">7.5.1.1</span>
+Collaborators</h4>
+<p>If you need to invite a collaborator to your repository, this person
+needs to have a “seat” in Epiconcept GitHub.</p>
+<p><em>Please keep in mind that <strong>Epiconcept company has a limited
+number of seats</strong> (for both Epiconcept colleagues and outside
+collaborators). Therefore, once your project is finalised, please remove
+your outside collaborators as soon as possible. This will automatically
+free a “seat” in Epiconcept GitHub for future projects.</em></p>
+<p>There are two possible scenarios, both valid for Epiconcept
+colleagues and outside collaborators:</p>
+<ul>
+<li>Either <u>my collaborator has already access to an existing
+Epiconcept repository</u>: then she/he already has a “seat” and you can
+directly add this person to your repository (which is usually the case
+for Epiconcept colleagues).</li>
+<li>Or <u>my collaborator does not currently have access to an exisitng
+Epiconcept repository</u>: then she/he does not already have a dedicated
+“seat”.
+<ul>
+<li><p><strong><em>Please create a Jira ticket to the Framework Service
+Desk</em></strong> (link: <a href="https://epiconcept.atlassian.net/servicedesk/customer/portal/13" class="uri">https://epiconcept.atlassian.net/servicedesk/customer/portal/13</a>
+)</p>
+<ul>
+<li>Select “Support and questions”</li>
+<li>Specify in the ticket description
+<ul>
+<li>the collaborator identity</li>
+<li>if she/he is an Epiconcept collaborator or not</li>
+<li>to which repositories the person needs access to</li>
+<li>and why she/he needs this access</li>
+</ul></li>
+</ul></li>
+<li><p><strong><em>The Framework team will then invite your collaborator
+and dedicate a “seat” for her/him.</em></strong></p></li>
+<li><p>Please note that if there is no immediate seat available in
+Epiconcept GitHub, then GitHub administrators will probably have to buy
+more seats for the company which might introduce some delay in the
+process.</p></li>
+</ul></li>
+</ul>
+<p>This procedure allows Epiconcept company to keep track of who has
+access to what for security and conformity reasons.</p>
+</div>
+<div id="teams" class="section level4" number="7.5.1.2">
+<h4><span class="header-section-number">7.5.1.2</span> Teams</h4>
 <p>Good practice to always add the Epidemio team to your repo with:</p>
 <ul>
 <li>Click on “Add teams”</li>
@@ -2229,31 +2352,6 @@ teams</h3>
 roles available on GitHub</em></p>
 </div>
 </div>
-<div id="outside-collaborators" class="section level3" number="7.5.2">
-<h3><span class="header-section-number">7.5.2</span> Outside
-collaborators</h3>
-<p>If you need to invite an external collaborator to your repository,
-this person needs a “seat” in Epiconcept GitHub.</p>
-<ul>
-<li>If this person is already collaborating in another Epiconcept
-repository, then she/he might already have a “seat” and you can directly
-add this person to your repository.</li>
-<li>If this person does not have a “seat”, then you will get an error
-message while trying to add her/him.
-<ul>
-<li><p><strong><em>&gt;&gt; Please create a Jira ticket to the Framework
-team, so that they can dedicate a “seat” for your
-collaborator</em></strong></p></li>
-<li><p>If there is no immediate seat available in Epiconcept GitHub,
-then GitHub administrators will possibly have to buy more seats for the
-company which might introduce some delay in the process.</p></li>
-</ul></li>
-</ul>
-<p><em>Please keep in mind that Epiconcept company has a limited number
-of seats (for Epiconcept colleagues and outside collaborators).
-Therefore, once your project is finalised, please remove your outside
-collaborators as much as possible. This will automatically free a “seat”
-in Epiconcept GitHub for future projects.</em></p>
 </div>
 </div>
 <div id="basic-recommendations" class="section level2" number="7.6">
@@ -2474,7 +2572,7 @@ $(document).ready(function ()  {
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
     };
-    options.showAndHide = true;
+    options.showAndHide = false;
     options.smoothScroll = true;
 
     // tocify
