@@ -488,10 +488,10 @@ In the STRAP team, we recommend the following tags:
 
     -   Any link `\url{../.html}` or `\href{.../.html}{display}`
 
-    -   Reference to the vignette - Either the code to run to access it: \
+    -   Reference to the vignette - Either the code to run to access it:\
         `For more details see the help vignette: \code{vignette("xlsxUtils", package = "epiuf")}`
 
-    -   Or the link to the vignette: \
+    -   Or the link to the vignette:\
         `For more details see the link below to access the vignette: \href{../doc/xlsxUtils.html}{\code{vignette("xlsxUtils")}}`
 
 ## `NEWS.md` file
@@ -792,15 +792,17 @@ We must end up with no error, warning nor note.
 Once we are happy with our changes to the packages:
 
 1)  Create a pull request from the `main` branch to your branch, in order to retrieve all recent commits that your *work in progress* branch might have missed.
-2)  Solve any conflict that might appear, and merge the recent commits from the `main` to your branch.
-3)  Now that your branch is up-to-date, increase the package version in the `DESCRIPTION` file and document the `NEWS.md` file according to your changes.
-4)  Test your new version of the package on a running project
+2)  If relevant, mention the \# of the issue corresponding to your work in the pull request comment.
+3)  Solve any conflict that might appear, and merge the recent commits from the `main` to your branch.
+4)  Now that your branch is up-to-date, increase the package version in the `DESCRIPTION` file and document the `NEWS.md` file according to your changes.
+5)  Test your new version of the package on a running project
     -   Ask your colleague to make a full copy the project folder
     -   Install again the package on your colleague's computer from your branch: Switch branch, build/install and check the package
     -   Run the project from scratch and check the outputs
-5)  If everything goes well, then you can merge your branch in the `main` branch.
-6)  Create a **pre-release** on GitHub
-7)  Inform the team of the new version of the package and describe the new features implemented. Please do not hesitate to share any documentation that you might have create (e.g. vignette, help page, NEWS, etc).
+6)  If everything goes well, then you can merge your branch in the `main` branch.
+7)  Don't forget to delete the branch once merged, delete the pull request and the corresponding issue.
+8)  Create a **pre-release** on GitHub
+9)  Inform the team of the new version of the package and describe the new features implemented. Please do not hesitate to share any documentation that you might have create (e.g. vignette, help page, NEWS, etc).
 
 # Procedure for code review
 
