@@ -639,7 +639,8 @@ usethis::use_git_config(user.name = "epi-jsw",
 usethis::create_github_token() 
 
 # 3. Set your PAT in RStudio with the command
-credentials::set_github_pat("ghp_bkfpdlHFD5Vtmxgf6NXkJy0jxM")
+credentials::set_github_pat("ghp_xxxxxxxxxxxxxxxxxxxxxxx") 
+        # Please replace 'xxx' with your own token!
 
 # 4. Restart R!!!
 
