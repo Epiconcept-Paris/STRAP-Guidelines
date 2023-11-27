@@ -520,6 +520,44 @@ To include automated tests in your package, we will use the `testthat` package.
 
 Some guidelines available here: <https://r-pkgs.org/testing-basics.html>.
 
+## How to include data in a package
+
+It might be useful to make a dataset available to the package end-users. However, we need to keep in mind that it cannot contain any sensitive data as it will be accessible to all end-users.
+
+You will find below basic steps to follow for that purpose:
+
+-   Import/Create the data frame of interest, e.g. `test <- data.frame(X = sample(1000))`
+-   An easy way is then to use the usethis package with the following command: `usethis::use_data(test)`. This shortcut will do the following actions for you:
+    -   In `DESCRITION` file, two lines will be added if not already present:
+        -   `Depends: R (>= 2.10)` as a minimum version of R is needed.
+        -   `LazyData: true` to allow "lazy loading" of your dataset. This will avoid to occupy any memory until you use the data embedded in your package.
+    -   Save your data frame as an `test.rda` file in the sub-folder `/data`
+
+Next and last step consists in documenting your data in the dedicated `R/data.R` R script. You will find below an example on how to document such R object.
+
+```         
+#' Dataset correspondence table between country/study site codes, country/study site names
+#'
+#' Dataframe providing the correspondence table of the id code \code{ID}
+#' and the geographical label \code{Label} to use
+#' throughout reports. Additional information is available in columns 
+#' \code{LocationName},
+#' \code{LocationType},
+#' and \code{CountryISO2Code}
+#'
+#' @format A data frame with 40 rows and 5 variables:
+#' \describe{
+#'   \item{ID}{Code associated to a location (country or study site), e.g. AT, BE, BG, etc.}
+#'   \item{Label}{Full name of the country or study site including 
+#'   'the' article for NL and UK  e.g. Austria, Belgium, the Netherlands, the United Kingdom etc.}
+#'   \item{LocationName}{Shorter name of the country or study site}
+#'   \item{LocationType}{For location, variable specifying the goegraphical level, i.e., country or Nuts3 location}
+#'   \item{CountryISO2Code}{ISO2 code of the corresponding country, e.g. ES for Navarra}
+#' }
+#' 
+"RefSite"
+```
+
 # Git and GitHub
 
 The Epidemiology team developed a nice guide available for Epiconcept accounts on Google Drive here: <https://docs.google.com/document/d/1Pjy1fc52UUd63VswKXFFFqvSmCtcjPXNSgeS8XHj6As/edit?usp=sharing>.

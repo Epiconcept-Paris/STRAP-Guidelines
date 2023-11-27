@@ -2038,6 +2038,57 @@ HTML page: <a href="https://cran.r-project.org/web/packages/EpiReport/news/news.
 <code>testthat</code> package.</p>
 <p>Some guidelines available here: <a href="https://r-pkgs.org/testing-basics.html" class="uri">https://r-pkgs.org/testing-basics.html</a>.</p>
 </div>
+<div id="how-to-include-data-in-a-package" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> How to include data
+in a package</h2>
+<p>It might be useful to make a dataset available to the package
+end-users. However, we need to keep in mind that it cannot contain any
+sensitive data as it will be accessible to all end-users.</p>
+<p>You will find below basic steps to follow for that purpose:</p>
+<ul>
+<li>Import/Create the data frame of interest,
+e.g. <code>test &lt;- data.frame(X = sample(1000))</code></li>
+<li>An easy way is then to use the usethis package with the following
+command: <code>usethis::use_data(test)</code>. This shortcut will do the
+following actions for you:
+<ul>
+<li>In <code>DESCRITION</code> file, two lines will be added if not
+already present:
+<ul>
+<li><code>Depends: R (&gt;= 2.10)</code> as a minimum version of R is
+needed.</li>
+<li><code>LazyData: true</code> to allow “lazy loading” of your dataset.
+This will avoid to occupy any memory until you use the data embedded in
+your package.</li>
+</ul></li>
+<li>Save your data frame as an <code>test.rda</code> file in the
+sub-folder <code>/data</code></li>
+</ul></li>
+</ul>
+<p>Next and last step consists in documenting your data in the dedicated
+<code>R/data.R</code> R script. You will find below an example on how to
+document such R object.</p>
+<pre><code>#&#39; Dataset correspondence table between country/study site codes, country/study site names
+#&#39;
+#&#39; Dataframe providing the correspondence table of the id code \code{ID}
+#&#39; and the geographical label \code{Label} to use
+#&#39; throughout reports. Additional information is available in columns 
+#&#39; \code{LocationName},
+#&#39; \code{LocationType},
+#&#39; and \code{CountryISO2Code}
+#&#39;
+#&#39; @format A data frame with 40 rows and 5 variables:
+#&#39; \describe{
+#&#39;   \item{ID}{Code associated to a location (country or study site), e.g. AT, BE, BG, etc.}
+#&#39;   \item{Label}{Full name of the country or study site including 
+#&#39;   &#39;the&#39; article for NL and UK  e.g. Austria, Belgium, the Netherlands, the United Kingdom etc.}
+#&#39;   \item{LocationName}{Shorter name of the country or study site}
+#&#39;   \item{LocationType}{For location, variable specifying the goegraphical level, i.e., country or Nuts3 location}
+#&#39;   \item{CountryISO2Code}{ISO2 code of the corresponding country, e.g. ES for Navarra}
+#&#39; }
+#&#39; 
+&quot;RefSite&quot;</code></pre>
+</div>
 </div>
 <div id="git-and-github" class="section level1" number="7">
 <h1><span class="header-section-number">7</span> Git and GitHub</h1>
