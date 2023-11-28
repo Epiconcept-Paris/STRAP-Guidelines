@@ -528,12 +528,12 @@ You will find below basic steps to follow for that purpose:
 
 -   Import/Create the data frame of interest, e.g. `test <- data.frame(X = sample(1000))`
 -   An easy way is then to use the usethis package with the following command: `usethis::use_data(test)`. This shortcut will do the following actions for you:
-    -   In `DESCRITION` file, two lines will be added if not already present:
+    -   In `DESCRIPTION` file, two lines will be added if not already present:
         -   `Depends: R (>= 2.10)` as a minimum version of R is needed.
         -   `LazyData: true` to allow "lazy loading" of your dataset. This will avoid to occupy any memory until you use the data embedded in your package.
-    -   Save your data frame as an `test.rda` file in the sub-folder `/data`
+    -   Save your data frame as an `test.rda` file in the sub-folder `/data`. 
 
-Next and last step consists in documenting your data in the dedicated `R/data.R` R script. You will find below an example on how to document such R object.
+Next and last step consists in documenting your data in the dedicated `R/data.R` R script. This script will/should contain the documentation of all embedded datasets. You will find below an example on how to document such R object.
 
 ```         
 #' Dataset correspondence table between country/study site codes, country/study site names
@@ -555,8 +555,13 @@ Next and last step consists in documenting your data in the dedicated `R/data.R`
 #'   \item{CountryISO2Code}{ISO2 code of the corresponding country, e.g. ES for Navarra}
 #' }
 #' 
-"RefSite"
+"test"
 ```
+
+Please note that the name of the data frame, of the rda file and the name used in the documentation should be consistent.
+
+After building again your package, you can now access your embedded data frame with the syntax: `epiuf::test`. And access the corresponding help page with: `?epiuf::test`.
+
 
 # Git and GitHub
 

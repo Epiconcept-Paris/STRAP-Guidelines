@@ -2052,7 +2052,7 @@ e.g. <code>test &lt;- data.frame(X = sample(1000))</code></li>
 command: <code>usethis::use_data(test)</code>. This shortcut will do the
 following actions for you:
 <ul>
-<li>In <code>DESCRITION</code> file, two lines will be added if not
+<li>In <code>DESCRIPTION</code> file, two lines will be added if not
 already present:
 <ul>
 <li><code>Depends: R (&gt;= 2.10)</code> as a minimum version of R is
@@ -2062,12 +2062,13 @@ This will avoid to occupy any memory until you use the data embedded in
 your package.</li>
 </ul></li>
 <li>Save your data frame as an <code>test.rda</code> file in the
-sub-folder <code>/data</code></li>
+sub-folder <code>/data</code>.</li>
 </ul></li>
 </ul>
 <p>Next and last step consists in documenting your data in the dedicated
-<code>R/data.R</code> R script. You will find below an example on how to
-document such R object.</p>
+<code>R/data.R</code> R script. This script will/should contain the
+documentation of all embedded datasets. You will find below an example
+on how to document such R object.</p>
 <pre><code>#&#39; Dataset correspondence table between country/study site codes, country/study site names
 #&#39;
 #&#39; Dataframe providing the correspondence table of the id code \code{ID}
@@ -2087,7 +2088,12 @@ document such R object.</p>
 #&#39;   \item{CountryISO2Code}{ISO2 code of the corresponding country, e.g. ES for Navarra}
 #&#39; }
 #&#39; 
-&quot;RefSite&quot;</code></pre>
+&quot;test&quot;</code></pre>
+<p>Please note that the name of the data frame, of the rda file and the
+name used in the documentation should be consistent.</p>
+<p>After building again your package, you can now access your embedded
+data frame with the syntax: <code>epiuf::test</code>. And access the
+corresponding help page with: <code>?epiuf::test</code>.</p>
 </div>
 </div>
 <div id="git-and-github" class="section level1" number="7">
