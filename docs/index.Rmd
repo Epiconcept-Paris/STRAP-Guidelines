@@ -1,7 +1,7 @@
 ---
 title: "Epidemiology Team R Guidelines"
 author: "Epiconcept"
-date: '2023-04-19'
+date: "`r Sys.Date()`"
 numbersections: true
 output:
   html_document:
