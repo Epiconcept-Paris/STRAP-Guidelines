@@ -685,7 +685,7 @@ usethis::gh_token_help()
 usethis::git_sitrep()
 ```
 
-```{r, echo=FALSE}
+```{r, , eval=FALSE, echo=FALSE}
 usethis::gh_token_help() 
 ```
 

@@ -11,7 +11,7 @@
 
 <meta name="author" content="Epiconcept" />
 
-<meta name="date" content="2023-12-04" />
+<meta name="date" content="2023-12-05" />
 
 <title>Epidemiology Team R Guidelines</title>
 
@@ -1488,7 +1488,7 @@ font-size: 0.95em;
 
 <h1 class="title toc-ignore">Epidemiology Team R Guidelines</h1>
 <h4 class="author">Epiconcept</h4>
-<h4 class="date">2023-12-04</h4>
+<h4 class="date">2023-12-05</h4>
 
 </div>
 
@@ -2266,16 +2266,6 @@ credentials::set_github_pat(&quot;ghp_xxxxxxxxxxxxxxxxxxxxxxx&quot;)
 usethis::gh_token_help() 
 # Or with (for more inforation on your account)
 usethis::git_sitrep()</code></pre>
-<pre><code>## • GitHub host: &#39;https://github.com&#39;
-## • Personal access token for &#39;https://github.com&#39;: &#39;&lt;discovered&gt;&#39;
-## • GitHub user: &#39;loremerdrignac&#39;
-## • Token scopes: &#39;gist, repo, workflow&#39;
-## ✖ Token lacks recommended scopes:
-##   - &#39;user:email&#39;: needed to read user&#39;s email addresses
-##   Consider re-creating your PAT with the missing scopes.
-##   `create_github_token()` defaults to the recommended scopes.
-## ✖ Can&#39;t retrieve registered email addresses from GitHub.
-##   Consider re-creating your PAT with the &#39;user&#39; or at least &#39;user:email&#39; scope.</code></pre>
 <pre class="r"><code># Note: if something went wrong, &#39;gitcreds&#39; better manages PAT conflicts
 library(gitcreds)
 gitcreds_get()
