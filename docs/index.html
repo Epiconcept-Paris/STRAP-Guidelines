@@ -1675,23 +1675,22 @@ highly recommended to avoid <code>print()</code> or <code>cat()</code>
 your message in the console.</p>
 <p>Instead, please use the following appropriate functions:</p>
 <ul>
-<li>The <code>message()</code> R function generates a diagnostic
-message;</li>
+<li>The <code>message()</code> R function generates a diagnostic message
+in red;</li>
 <li>The <code>warning()</code> R function generates a warning message in
 red;</li>
 <li>The <code>stop()</code> R function generates an error message in red
 and stops executing the current R code.</li>
 </ul>
-<pre><code>message(&quot;The output data frame has been saved as a cvs in your root folder.&quot;)
-# The output data frame has been saved as a cvs in your root folder.
+<pre><code>&gt; message(&quot;The output data frame has been saved as a cvs in your root folder.&quot;)
+The output data frame has been saved as a cvs in your root folder.
 
-warning(paste(n_missing, &quot;values were converted in NA&quot;))
-# Warning message:
-# 56 values were converted in NA
+&gt; warning(paste(n_missing, &quot;values were converted in NA&quot;))
+Warning message:
+56 values were converted in NA
 
-stop(&quot;Variable &#39;by&#39; is missing, output cannot be computed&quot;)
-# Error: Variable &#39;by&#39; is missing, output cannot be computed
-</code></pre>
+&gt; stop(&quot;Variable &#39;by&#39; is missing, output cannot be computed&quot;)
+Error: Variable &#39;by&#39; is missing, output cannot be computed</code></pre>
 </div>
 <div id="call" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Call</h2>
@@ -2522,7 +2521,14 @@ branch: Switch branch, build/install and check the package</li>
 <li>If everything goes well, then you can merge your branch in the
 <code>main</code> branch.</li>
 <li>Don’t forget to delete the branch once merged, delete the pull
-request and the corresponding issue.</li>
+request and the corresponding issue.
+<ul>
+<li>Once the branch deleted on the remote, don’t forget to delete it
+locally as well. You can use the syntax:
+<code>git branch -d &lt;mybranch&gt;</code></li>
+<li>You can also use the command <code>git fetch --prune</code> to clean
+and delete all outdated branches on your local Git</li>
+</ul></li>
 <li>Create a <strong>pre-release</strong> on GitHub</li>
 <li>Inform the team of the new version of the package and describe the
 new features implemented. Please do not hesitate to share any

@@ -195,27 +195,25 @@ add2Values <- function(x, y) {
 
 When building a function, you might possibly need to return messages, warnings or even error messages to your end-user, according to the function input or the output results.
 
-For any kind of information that you want to give to your end-user, and in order to easily distinguish messages from output results,  it is highly recommended to avoid `print()` or `cat()` your message in the console.
+For any kind of information that you want to give to your end-user, and in order to easily distinguish messages from output results, it is highly recommended to avoid `print()` or `cat()` your message in the console.
 
 Instead, please use the following appropriate functions:
 
--   The `message()` R function generates a diagnostic message;
+-   The `message()` R function generates a diagnostic message in red;
 -   The `warning()` R function generates a warning message in red;
 -   The `stop()` R function generates an error message in red and stops executing the current R code.
 
+```         
+> message("The output data frame has been saved as a cvs in your root folder.")
+The output data frame has been saved as a cvs in your root folder.
+
+> warning(paste(n_missing, "values were converted in NA"))
+Warning message:
+56 values were converted in NA
+
+> stop("Variable 'by' is missing, output cannot be computed")
+Error: Variable 'by' is missing, output cannot be computed
 ```
-message("The output data frame has been saved as a cvs in your root folder.")
-# The output data frame has been saved as a cvs in your root folder.
-
-warning(paste(n_missing, "values were converted in NA"))
-# Warning message:
-# 56 values were converted in NA
-
-stop("Variable 'by' is missing, output cannot be computed")
-# Error: Variable 'by' is missing, output cannot be computed
-
-```
-
 
 ## Call
 
@@ -862,6 +860,8 @@ Once we are happy with our changes to the packages:
     -   Run the project from scratch and check the outputs
 6)  If everything goes well, then you can merge your branch in the `main` branch.
 7)  Don't forget to delete the branch once merged, delete the pull request and the corresponding issue.
+    -   Once the branch deleted on the remote, don't forget to delete it locally as well. You can use the syntax: `git branch -d <mybranch>`
+    -   You can also use the command `git fetch --prune` to clean and delete all outdated branches on your local Git
 8)  Create a **pre-release** on GitHub
 9)  Inform the team of the new version of the package and describe the new features implemented. Please do not hesitate to share any documentation that you might have create (e.g. vignette, help page, NEWS, etc).
 
