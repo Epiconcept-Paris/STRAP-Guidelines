@@ -11,7 +11,7 @@
 
 <meta name="author" content="Epiconcept" />
 
-<meta name="date" content="2023-12-05" />
+<meta name="date" content="2023-12-21" />
 
 <title>Epidemiology Team R Guidelines</title>
 
@@ -1488,7 +1488,7 @@ font-size: 0.95em;
 
 <h1 class="title toc-ignore">Epidemiology Team R Guidelines</h1>
 <h4 class="author">Epiconcept</h4>
-<h4 class="date">2023-12-05</h4>
+<h4 class="date">2023-12-21</h4>
 
 </div>
 
@@ -1663,8 +1663,38 @@ add2Values &lt;- function(x, y) {
   x + y
 }</code></pre>
 </div>
-<div id="call" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> Call</h2>
+<div id="returning-message-warning-or-stop" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Returning message,
+warning or stop</h2>
+<p>When building a function, you might possibly need to return messages,
+warnings or even error messages to your end-user, according to the
+function input or the output results.</p>
+<p>For any kind of information that you want to give to your end-user,
+and in order to easily distinguish messages from output results, it is
+highly recommended to avoid <code>print()</code> or <code>cat()</code>
+your message in the console.</p>
+<p>Instead, please use the following appropriate functions:</p>
+<ul>
+<li>The <code>message()</code> R function generates a diagnostic
+message;</li>
+<li>The <code>warning()</code> R function generates a warning message in
+red;</li>
+<li>The <code>stop()</code> R function generates an error message in red
+and stops executing the current R code.</li>
+</ul>
+<pre><code>message(&quot;The output data frame has been saved as a cvs in your root folder.&quot;)
+# The output data frame has been saved as a cvs in your root folder.
+
+warning(paste(n_missing, &quot;values were converted in NA&quot;))
+# Warning message:
+# 56 values were converted in NA
+
+stop(&quot;Variable &#39;by&#39; is missing, output cannot be computed&quot;)
+# Error: Variable &#39;by&#39; is missing, output cannot be computed
+</code></pre>
+</div>
+<div id="call" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Call</h2>
 <p>Please always specify the name of the arguments when calling a
 function so that you do not rely on the order of your unnamed
 arguments.</p>
@@ -1713,8 +1743,8 @@ who %&gt;% tidyr::pivot_longer(
   values_to = &quot;value&quot;
 )</code></pre>
 </div>
-<div id="function-documentation" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> Function
+<div id="function-documentation" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Function
 documentation</h2>
 <p>Please make sure that you always develop your function together with
 an exhaustive <code>roxygen2</code> in-line documentation, even if the

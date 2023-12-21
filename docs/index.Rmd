@@ -191,6 +191,32 @@ add2Values <- function(x, y) {
 }
 ```
 
+## Returning message, warning or stop
+
+When building a function, you might possibly need to return messages, warnings or even error messages to your end-user, according to the function input or the output results.
+
+For any kind of information that you want to give to your end-user, and in order to easily distinguish messages from output results,  it is highly recommended to avoid `print()` or `cat()` your message in the console.
+
+Instead, please use the following appropriate functions:
+
+-   The `message()` R function generates a diagnostic message;
+-   The `warning()` R function generates a warning message in red;
+-   The `stop()` R function generates an error message in red and stops executing the current R code.
+
+```
+message("The output data frame has been saved as a cvs in your root folder.")
+# The output data frame has been saved as a cvs in your root folder.
+
+warning(paste(n_missing, "values were converted in NA"))
+# Warning message:
+# 56 values were converted in NA
+
+stop("Variable 'by' is missing, output cannot be computed")
+# Error: Variable 'by' is missing, output cannot be computed
+
+```
+
+
 ## Call
 
 Please always specify the name of the arguments when calling a function so that you do not rely on the order of your unnamed arguments.
@@ -523,7 +549,7 @@ You will find below basic steps to follow for that purpose:
     -   In `DESCRIPTION` file, two lines will be added if not already present:
         -   `Depends: R (>= 2.10)` as a minimum version of R is needed.
         -   `LazyData: true` to allow "lazy loading" of your dataset. This will avoid to occupy any memory until you use the data embedded in your package.
-    -   Save your data frame as an `test.rda` file in the sub-folder `/data`. 
+    -   Save your data frame as an `test.rda` file in the sub-folder `/data`.
 
 Next and last step consists in documenting your data in the dedicated `R/data.R` R script. This script will/should contain the documentation of all embedded datasets. You will find below an example on how to document such R object.
 
@@ -553,7 +579,6 @@ Next and last step consists in documenting your data in the dedicated `R/data.R`
 Please note that the name of the data frame, of the rda file and the name used in the documentation should be consistent.
 
 After building again your package, you can now access your embedded data frame with the syntax: `epiuf::test`. And access the corresponding help page with: `?epiuf::test`.
-
 
 # Git and GitHub
 
