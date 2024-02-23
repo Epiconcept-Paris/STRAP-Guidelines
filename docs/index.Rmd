@@ -580,7 +580,7 @@ After building again your package, you can now access your embedded data frame w
 
 # Git and GitHub
 
-The Epidemiology team developed a nice guide available for Epiconcept accounts on Google Drive here: <https://docs.google.com/document/d/1Pjy1fc52UUd63VswKXFFFqvSmCtcjPXNSgeS8XHj6As/edit?usp=sharing>.
+The Epidemiology team developed a nice guide available for Epiconcept accounts on Google Drive in the `STRAP` folder.
 
 Additional references: <https://happygitwithr.com/>.
 
@@ -675,7 +675,7 @@ In a nutshell, the steps to follow in order to set up Git / GitHub with R Studio
 
     -   Setting GitHub encrypted personal access token (PAT)
 
-Please follow the R script `setupgit.R` (also available [here](https://drive.google.com/file/d/1bNi8clyORx7R2uL-cFMEpWLdzo7wjfgU/view?usp=share_link)) below to set your GitHub in R Studio:
+Please follow the R script `setupgit.R` (also available [here](https://github.com/Epiconcept-Paris/STRAP-Guidelines/blob/main/useful_scripts/setupgit.R)) below to set your GitHub in R Studio:
 
 ```{r, eval=FALSE}
 # Please make sure that
